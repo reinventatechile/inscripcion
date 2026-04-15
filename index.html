@@ -524,21 +524,18 @@
 <!-- MAIN -->
 <main class="main">
   <p class="section-tag">La experiencia</p>
-  <p class="intro">Una mañana íntima frente al lago — diseñada para mujeres que están en el momento de volver a sí mismas. No es un evento más. Es un espacio donde sales con algo concreto: claridad sobre quién eres hoy y cómo quieres mostrarte al mundo.</p>
+  <p class="intro">Una mañana íntima frente al lago — diseñada para mujeres que están en el momento de volver a sí mismas. No es un evento más. Es un espacio donde el networking deja de ser forzado y se convierte en conexión real, y donde sales con algo concreto: claridad sobre quién eres hoy y cómo quieres mostrarte al mundo.</p>
   <p class="intro" style="margin-top:-16px; font-size:19px;">Un sábado para ti, en uno de los lugares más hermosos del sur de Chile.</p>
 
   <ul class="experiencia-list">
     <li>
-      <div><em>Workshop de imagen personal</em><small>Un espacio de reflexión y herramientas prácticas para reconectar con tu estilo y presencia.</small></div>
+      <div><em>Workshop de imagen personal y colorimetría</em><small>Un espacio de reflexión y herramientas prácticas para reconectar con tu estilo y presencia.</small></div>
     </li>
     <li>
-      <div><em>Colorimetría</em><small>Para algunas asistentes — descubre la paleta de colores que más favorece tu piel, cabello y ojos.</small></div>
+      <div><em>Networking guiado</em><small>Conversaciones con propósito entre mujeres que están construyendo sus proyectos de vida.</small></div>
     </li>
     <li>
       <div><em>Coctelería y ambientación</em><small>Bienvenida con coctelería durante toda la mañana, en un entorno cuidado frente al lago Llanquihue.</small></div>
-    </li>
-    <li>
-      <div><em>Registro fotográfico profesional</em><small>Fotos del evento que subiremos a nuestras redes sociales.</small></div>
     </li>
   </ul>
 
@@ -648,6 +645,7 @@
             <option>Tecnología / desarrollo / sistemas</option>
             <option>Gastronomía / turismo / hotelería</option>
             <option>Sector público / gobierno</option>
+            <option>Agricultura / campo / naturaleza</option>
             <option>Dueña de casa / maternidad</option>
             <option>Jubilada / independiente</option>
             <option>Estudiante</option>
@@ -661,7 +659,7 @@
             <option value="">Selecciona</option>
             <option>Instagram de Reinvéntate</option>
             <option>Me lo recomendó una amiga</option>
-            <option>Por las fundadoras de Reinvéntate</option>
+            <option>Por las fundadoras de Casa Renata Spa</option>
             <option>Facebook</option>
             <option>WhatsApp / Grupo</option>
             <option>Otro</option>
@@ -809,11 +807,11 @@ var CONFIG = {
 
   // Pega aquí la URL de tu Google Apps Script Web App
   // (te explico cómo obtenerla en la guía de setup)
-  APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxxXtpV4il2Auzp9gbJDG8G5LfpnS0YJHdiejWAOnoCFyI0oiFPeGIJ2WBbrL_Wd8WF/exec',
+  APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwNaLFVjpMuF7P4Li7vM0Lns9wUY5wCkEMT110iiWj8wCGL4E77_gU5bC1iXFaX_ghK/exec',
 
   // Para contar cupos desde Google Sheets (opcional pero recomendado)
   // Pega la URL del CSV publicado de tu celda de cupos confirmados
-  SHEETS_CSV_URL: '',
+  SHEETS_CSV_URL: 'https://docs.google.com/spreadsheets/d/1Tw8Wy7jneZHLPySBYDOKRaV_upz_FtF37YfQK1bfNGE/edit?gid=1306707980#gid=1306707980',
 
   WA_NUMBER:   '+56988432910',
   EVENT_DATE:  new Date('2026-05-30T11:30:00-04:00'),
@@ -853,19 +851,18 @@ function updateCuposDisplay(usados) {
 }
 
 function fetchCupos() {
-  if (!CONFIG.SHEETS_CSV_URL) return;
-  fetch(CONFIG.SHEETS_CSV_URL + '&t=' + Date.now())
-    .then(function(r) { return r.text(); })
-    .then(function(t) {
-      var n = parseInt(t.split('\n')[1]);
-      if (!isNaN(n)) updateCuposDisplay(n);
+  if (!CONFIG.APPS_SCRIPT_URL || CONFIG.APPS_SCRIPT_URL.indexOf('PEGA_AQUI') !== -1) return;
+  fetch(CONFIG.APPS_SCRIPT_URL + '?action=cupos&t=' + Date.now())
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (typeof d.confirmados === 'number') updateCuposDisplay(d.confirmados);
     })
     .catch(function() {});
 }
 
-updateCuposDisplay(0); // valor inicial; 0 = todos disponibles
+updateCuposDisplay(0);
 fetchCupos();
-setInterval(fetchCupos, 60000); // refresca cada minuto
+setInterval(fetchCupos, 60000);
 
 // ══════════════════════════════════════════════════════
 // COUNTDOWN
@@ -1045,29 +1042,47 @@ function handleSubmit() {
     cuposDisponibles: CONFIG.TOTAL_CUPOS - cuposUsados
   });
 
-  // Si hay Apps Script configurado, enviar ahí (con archivo)
-  if (CONFIG.APPS_SCRIPT_URL !== 'PEGA_AQUI_TU_URL_DE_APPS_SCRIPT') {
-    var formObj = new FormData();
-    Object.keys(payload).forEach(function(k) { formObj.append(k, payload[k]); });
-    if (fileData) formObj.append('comprobante', fileData, fileData.name);
-
-    fetch(CONFIG.APPS_SCRIPT_URL, { method: 'POST', body: formObj })
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        if (data.result === 'success' || data.status === 'ok') {
-          showSuccess();
-        } else {
-          showError(errEl, 'Ocurrió un error al enviar. Intenta nuevamente.');
-          btn.classList.remove('loading'); btn.disabled = false;
-        }
-      })
-      .catch(function() {
-        // Si falla el servidor, igual mostramos éxito y abrimos WhatsApp
-        showSuccess();
-      });
-  } else {
-    // Sin Apps Script: simular éxito y abrir WhatsApp
+  if (CONFIG.APPS_SCRIPT_URL.indexOf('PEGA_AQUI') !== -1) {
     setTimeout(showSuccess, 800);
+    return;
+  }
+
+  // Convertir imagen a base64 y enviar como JSON (método confiable con Apps Script)
+  function enviarConImagen(base64, mime, nombre) {
+    payload.comprobanteBase64  = base64 || '';
+    payload.comprobanteMime    = mime   || '';
+    payload.comprobanteNombre  = nombre || '';
+
+    fetch(CONFIG.APPS_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(payload)
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.result === 'success') {
+        showSuccess();
+      } else {
+        showError(errEl, 'Error al enviar. Intenta nuevamente.');
+        btn.classList.remove('loading'); btn.disabled = false;
+      }
+    })
+    .catch(function() {
+      showSuccess(); // igual mostramos éxito y WhatsApp como respaldo
+    });
+  }
+
+  if (fileData) {
+    var reader = new FileReader();
+    reader.onload = function(ev) {
+      var parts  = ev.target.result.split(',');
+      var base64 = parts[1];
+      enviarConImagen(base64, fileData.type, fileData.name);
+    };
+    reader.onerror = function() { enviarConImagen('', '', ''); };
+    reader.readAsDataURL(fileData);
+  } else {
+    enviarConImagen('', '', '');
   }
 }
 
