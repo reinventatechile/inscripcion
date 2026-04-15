@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reinvéntate — Inscripción 30 de Mayo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Barlow+Condensed:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ─── VARIABLES ─── */
+  :root {
+    --burdo: #6B1226;
+    --burdo-deep: #4D0D1B;
+    --burdo-light: rgba(107,18,38,0.07);
+    --burdo-border: rgba(107,18,38,0.15);
+    --rosa: #FAE8EC;
+    --rosa-mid: #F2B8C6;
+    --rosa-pale: rgba(249,210,221,0.7);
+    --text-dark: #3D0A16;
+    --white: #ffffff;
+    --success: #2D7A4F;
+    --warning: #B85C00;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Barlow Condensed', sans-serif;
+    background: var(--rosa);
+    color: var(--text-dark);
+    min-height: 100vh;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: var(--burdo);
+    padding: 60px 32px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg-text {
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(80px, 18vw, 200px);
+    font-weight: 300;
+    color: rgba(255,255,255,0.03);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+  }
+  .hero-content { position: relative; z-index: 1; }
+  .logo-svg { width: 48px; height: 48px; margin: 0 auto 20px; display: block; }
+  .eyebrow {
+    font-size: 11px; letter-spacing: 4px; color: var(--rosa-pale);
+    text-transform: uppercase; margin-bottom: 16px; font-weight: 300;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(54px, 12vw, 86px);
+    font-weight: 300; color: var(--rosa);
+    line-height: 0.88; letter-spacing: -1px; margin-bottom: 10px;
+  }
+  .hero-title em { font-style: italic; color: var(--rosa-mid); }
+  .date-bar {
+    display: flex; align-items: center; justify-content: center;
+    gap: 18px; margin-top: 28px;
+  }
+  .date-bar .line { width: 44px; height: 0.5px; background: rgba(242,184,198,0.4); }
+  .date-bar span {
+    font-size: 12px; letter-spacing: 3.5px;
+    color: var(--rosa-mid); text-transform: uppercase;
+  }
+
+  /* ─── COUNTDOWN ─── */
+  .countdown-wrap {
+    background: var(--burdo-deep);
+    padding: 28px 24px 36px;
+  }
+  .cd-label {
+    text-align: center; font-size: 10px; letter-spacing: 3px;
+    color: rgba(242,184,198,0.4); text-transform: uppercase; margin-bottom: 16px;
+  }
+  .cd-grid {
+    display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
+  }
+  .cd-box {
+    background: rgba(255,255,255,0.05);
+    border: 0.5px solid rgba(242,184,198,0.15);
+    border-radius: 6px; padding: 16px 12px 12px;
+    min-width: 72px; text-align: center;
+    transition: border-color 0.3s;
+  }
+  .cd-box.pulse { border-color: rgba(242,184,198,0.4); }
+  .cd-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 50px; font-weight: 300; color: var(--rosa); line-height: 1; display: block;
+  }
+  .cd-unit {
+    font-size: 9px; letter-spacing: 2.5px; color: rgba(242,184,198,0.4);
+    text-transform: uppercase; margin-top: 6px; display: block;
+  }
+
+  /* cupos bar */
+  .cupos-wrap {
+    max-width: 360px; margin: 20px auto 0;
+    background: rgba(255,255,255,0.05);
+    border: 0.5px solid rgba(242,184,198,0.12);
+    border-radius: 5px; padding: 12px 18px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .cupos-label {
+    font-size: 10px; letter-spacing: 2px; color: rgba(242,184,198,0.45);
+    text-transform: uppercase; white-space: nowrap;
+  }
+  .cupos-track { flex: 1; height: 3px; background: rgba(242,184,198,0.1); border-radius: 2px; }
+  .cupos-fill { height: 100%; background: var(--rosa-mid); border-radius: 2px; transition: width 1.2s ease; }
+  .cupos-count {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; color: var(--rosa-mid); white-space: nowrap; line-height: 1;
+  }
+  .cupos-count small {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 12px;
+    color: rgba(242,184,198,0.35);
+  }
+  .cupos-urgente { color: #F2B8C6; font-weight: 600; animation: blink 1.5s ease-in-out infinite; }
+  @keyframes blink { 50% { opacity: 0.5; } }
+
+  /* ─── INFO STRIP ─── */
+  .info-strip {
+    background: var(--rosa);
+    display: flex; justify-content: center;
+    border-bottom: 0.5px solid var(--burdo-border);
+    flex-wrap: wrap;
+  }
+  .info-item {
+    padding: 20px 28px; text-align: center;
+    border-right: 0.5px solid var(--burdo-border);
+    flex: 1; min-width: 90px;
+  }
+  .info-item:last-child { border-right: none; }
+  .info-label { font-size: 10px; letter-spacing: 2.5px; color: rgba(107,18,38,0.4); text-transform: uppercase; margin-bottom: 4px; }
+  .info-value { font-size: 14px; font-weight: 600; color: var(--burdo); letter-spacing: 0.3px; }
+
+  /* ─── MAIN ─── */
+  .main { max-width: 600px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  .section-tag {
+    font-size: 10px; letter-spacing: 3px; color: rgba(107,18,38,0.4);
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+  .intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 300; font-style: italic;
+    line-height: 1.65; color: var(--text-dark); margin-bottom: 32px;
+  }
+  .experiencia-list {
+    list-style: none; margin-bottom: 44px; padding: 0;
+    border-top: 0.5px solid var(--burdo-border);
+  }
+  .experiencia-list li {
+    display: flex; align-items: baseline; gap: 14px;
+    padding: 13px 0;
+    border-bottom: 0.5px solid var(--burdo-border);
+    font-size: 14px; color: var(--text-dark); letter-spacing: 0.2px;
+    line-height: 1.5;
+  }
+  .experiencia-list li::before {
+    content: "✦"; font-size: 10px; color: var(--burdo); opacity: 0.5;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .experiencia-list li em {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 15px; color: var(--burdo); font-weight: 400;
+  }
+  .experiencia-list li small {
+    font-size: 11px; color: rgba(107,18,38,0.45); display: block;
+    margin-top: 2px; letter-spacing: 0.2px;
+  }
+
+  /* ─── PROGRESS STEPS ─── */
+  .steps-bar {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0; margin-bottom: 32px;
+  }
+  .step-dot {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    position: relative;
+  }
+  .step-circle {
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 1.5px solid var(--burdo-border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 600; color: rgba(107,18,38,0.35);
+    background: var(--white); transition: all 0.3s; z-index: 1;
+  }
+  .step-dot.active .step-circle {
+    background: var(--burdo); color: var(--rosa); border-color: var(--burdo);
+  }
+  .step-dot.done .step-circle {
+    background: var(--burdo-light); color: var(--burdo); border-color: var(--burdo);
+  }
+  .step-name {
+    font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: rgba(107,18,38,0.35); transition: color 0.3s;
+  }
+  .step-dot.active .step-name { color: var(--burdo); }
+  .step-line {
+    flex: 1; height: 1px; background: var(--burdo-border);
+    margin: 0 8px; margin-bottom: 22px; max-width: 60px;
+  }
+
+  /* ─── FORM CARD ─── */
+  .form-card {
+    background: var(--white);
+    border: 0.5px solid var(--burdo-border);
+    border-radius: 10px; padding: 36px 32px;
+    box-shadow: 0 2px 24px rgba(107,18,38,0.05);
+  }
+  @media (max-width: 480px) { .form-card { padding: 28px 20px; } }
+
+  .form-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px; font-weight: 400; color: var(--burdo); margin-bottom: 4px;
+  }
+  .form-sub {
+    font-size: 11px; letter-spacing: 2px; color: rgba(107,18,38,0.4);
+    text-transform: uppercase; margin-bottom: 28px;
+  }
+  .form-sub span { color: var(--burdo); font-weight: 600; }
+
+  .section-divider {
+    font-size: 10px; letter-spacing: 2.5px; color: rgba(107,18,38,0.35);
+    text-transform: uppercase; margin: 26px 0 16px;
+    padding-bottom: 8px; border-bottom: 0.5px solid rgba(107,18,38,0.08);
+  }
+
+  /* campos */
+  .field { margin-bottom: 16px; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 400px) { .field-row { grid-template-columns: 1fr; } }
+
+  .field label {
+    display: block; font-size: 10px; letter-spacing: 2px;
+    color: rgba(107,18,38,0.45); text-transform: uppercase; margin-bottom: 7px;
+  }
+  .field input, .field select, .field textarea {
+    width: 100%; padding: 12px 14px;
+    background: #FBF5F7; border: 0.5px solid var(--burdo-border);
+    border-radius: 4px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px; color: var(--text-dark);
+    outline: none; transition: border-color 0.2s, background 0.2s;
+    -webkit-appearance: none; appearance: none;
+  }
+  .field input::placeholder, .field textarea::placeholder { color: rgba(107,18,38,0.28); }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    border-color: var(--burdo); background: var(--white);
+    box-shadow: 0 0 0 3px rgba(107,18,38,0.05);
+  }
+  .field input.error, .field select.error { border-color: #C0392B; background: #FFF5F5; }
+  .field select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B1226' stroke-width='1.2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px;
+  }
+  .field textarea { resize: vertical; min-height: 80px; }
+  .field-hint { font-size: 11px; color: rgba(107,18,38,0.4); margin-top: 5px; letter-spacing: 0.3px; }
+  .field-error { font-size: 11px; color: #C0392B; margin-top: 5px; display: none; }
+
+  /* ─── PRICE BOX ─── */
+  .price-box {
+    background: var(--burdo); border-radius: 6px;
+    padding: 20px 22px; margin: 24px 0;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .price-label { font-size: 10px; letter-spacing: 2px; color: rgba(242,184,198,0.6); text-transform: uppercase; margin-bottom: 4px; }
+  .price-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px; font-weight: 300; color: var(--rosa); line-height: 1;
+  }
+  .price-note { font-size: 11px; color: rgba(242,184,198,0.5); text-align: right; line-height: 1.7; }
+
+  /* ─── TRANSFER BOX ─── */
+  .transfer {
+    background: rgba(107,18,38,0.04);
+    border-left: 2px solid var(--burdo);
+    padding: 15px 17px; margin-bottom: 24px;
+    border-radius: 0 4px 4px 0;
+  }
+  .transfer-title {
+    font-size: 10px; letter-spacing: 2px; color: rgba(107,18,38,0.4);
+    text-transform: uppercase; margin-bottom: 10px;
+  }
+  .tr { display: flex; justify-content: space-between; padding: 3px 0; align-items: baseline; }
+  .tr-k { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: rgba(107,18,38,0.4); }
+  .tr-v { font-size: 14px; color: var(--text-dark); font-weight: 500; }
+  .copy-btn {
+    background: none; border: none; cursor: pointer;
+    font-size: 11px; color: var(--burdo); opacity: 0.5;
+    transition: opacity 0.2s; padding: 0; margin-left: 6px;
+    text-decoration: underline; font-family: 'Barlow Condensed', sans-serif;
+  }
+  .copy-btn:hover { opacity: 1; }
+
+  /* ─── UPLOAD COMPROBANTE ─── */
+  .upload-zone {
+    border: 1.5px dashed var(--burdo-border);
+    border-radius: 6px; padding: 24px 20px;
+    text-align: center; cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    position: relative; background: #FBF5F7;
+  }
+  .upload-zone:hover, .upload-zone.dragover {
+    border-color: var(--burdo); background: var(--burdo-light);
+  }
+  .upload-zone input[type="file"] {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    opacity: 0; cursor: pointer;
+  }
+  .upload-icon { font-size: 22px; margin-bottom: 8px; color: var(--burdo); opacity: 0.4; }
+  .upload-text { font-size: 12px; color: rgba(107,18,38,0.5); letter-spacing: 0.5px; }
+  .upload-text strong { color: var(--burdo); }
+  .upload-preview {
+    display: none; margin-top: 14px; position: relative;
+  }
+  .upload-preview img {
+    max-width: 100%; max-height: 200px; border-radius: 4px;
+    border: 0.5px solid var(--burdo-border); object-fit: cover;
+  }
+  .upload-preview-name {
+    font-size: 12px; color: var(--burdo); margin-top: 6px;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .upload-remove {
+    background: none; border: none; color: rgba(107,18,38,0.5);
+    cursor: pointer; font-size: 16px; padding: 0;
+    transition: color 0.2s;
+  }
+  .upload-remove:hover { color: var(--burdo); }
+  .upload-success-icon { font-size: 18px; color: #2D7A4F; }
+
+  /* ─── BUTTONS ─── */
+  .btn-submit {
+    width: 100%; padding: 16px;
+    background: var(--burdo); color: var(--rosa);
+    border: none; border-radius: 4px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; font-weight: 600; letter-spacing: 3.5px;
+    text-transform: uppercase; cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .btn-submit:hover { background: var(--burdo-deep); }
+  .btn-submit:active { transform: scale(0.99); }
+  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+  .btn-submit .spinner {
+    width: 16px; height: 16px; border: 2px solid rgba(249,210,221,0.3);
+    border-top-color: var(--rosa); border-radius: 50%;
+    animation: spin 0.7s linear infinite; display: none;
+  }
+  .btn-submit.loading .spinner { display: block; }
+  .btn-submit.loading .btn-text { opacity: 0.7; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .disclaimer {
+    font-size: 11px; color: rgba(107,18,38,0.35);
+    text-align: center; margin-top: 13px; line-height: 1.7;
+  }
+
+  /* ─── SOLD OUT ─── */
+  .agotado {
+    display: none; text-align: center; padding: 24px;
+    border: 0.5px solid var(--burdo-border); border-radius: 6px;
+    background: var(--burdo-light); margin-bottom: 20px;
+  }
+  .agotado p:first-child {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; font-style: italic; color: var(--burdo); margin-bottom: 8px;
+  }
+  .agotado p:last-child { font-size: 12px; color: rgba(107,18,38,0.5); line-height: 1.6; }
+
+  /* ─── ALERTA FORM ─── */
+  .form-alert {
+    display: none;
+    padding: 12px 16px;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-bottom: 18px;
+    line-height: 1.5;
+  }
+  .form-alert.error { background: #FFF5F5; border: 0.5px solid #C0392B; color: #C0392B; }
+  .form-alert.show { display: block; animation: slideDown 0.25s ease; }
+  @keyframes slideDown { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ─── SUCCESS ─── */
+  .success { display: none; }
+  .success.show { display: block; animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  .success-header {
+    text-align: center; padding: 10px 0 28px;
+    border-bottom: 0.5px solid var(--burdo-border); margin-bottom: 24px;
+  }
+  .success-mark {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: rgba(45,122,79,0.1);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px; font-size: 22px;
+  }
+  .success h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px; font-weight: 400; color: var(--burdo); margin-bottom: 8px;
+  }
+  .success-sub {
+    font-size: 11px; letter-spacing: 2px; color: rgba(107,18,38,0.4);
+    text-transform: uppercase;
+  }
+  .success-card {
+    background: var(--burdo-light); border: 0.5px solid var(--burdo-border);
+    border-radius: 6px; padding: 20px; margin-bottom: 16px;
+  }
+  .success-card-title {
+    font-size: 10px; letter-spacing: 2px; color: rgba(107,18,38,0.4);
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  .success-row { display: flex; justify-content: space-between; padding: 4px 0; }
+  .success-row span:first-child { font-size: 12px; color: rgba(107,18,38,0.45); }
+  .success-row span:last-child { font-size: 13px; font-weight: 500; color: var(--text-dark); }
+
+  .success-steps {
+    counter-reset: step-counter;
+    list-style: none; margin: 20px 0;
+  }
+  .success-steps li {
+    counter-increment: step-counter;
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 10px 0;
+    border-bottom: 0.5px solid rgba(107,18,38,0.07);
+    font-size: 13px; line-height: 1.5; color: rgba(107,18,38,0.7);
+  }
+  .success-steps li::before {
+    content: counter(step-counter);
+    min-width: 22px; height: 22px;
+    background: var(--burdo); color: var(--rosa);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+  }
+
+  .btn-wa {
+    width: 100%; padding: 15px;
+    background: #25D366; color: white;
+    border: none; border-radius: 4px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; font-weight: 600; letter-spacing: 2.5px;
+    text-transform: uppercase; cursor: pointer;
+    transition: background 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    text-decoration: none; margin-top: 20px;
+  }
+  .btn-wa:hover { background: #128C7E; }
+  .wa-icon { font-size: 18px; }
+
+  /* ─── FOOTER ─── */
+  .footer { background: var(--burdo); padding: 30px 24px; text-align: center; }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-style: italic; font-weight: 300;
+    color: rgba(249,210,221,0.5); margin-bottom: 7px;
+  }
+  .footer-contact { font-size: 12px; letter-spacing: 1.5px; color: rgba(242,184,198,0.35); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-content > * { animation: slideUp 0.7s ease both; }
+  .hero-content > *:nth-child(1) { animation-delay: 0.05s; }
+  .hero-content > *:nth-child(2) { animation-delay: 0.12s; }
+  .hero-content > *:nth-child(3) { animation-delay: 0.22s; }
+  .hero-content > *:nth-child(4) { animation-delay: 0.32s; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-text">Reinvéntate</div>
+  <div class="hero-content">
+    <svg class="logo-svg" viewBox="0 0 48 48" fill="none">
+      <circle cx="24" cy="24" r="23" stroke="rgba(242,184,198,0.3)" stroke-width="0.5"/>
+      <path d="M24 7 C24 7 34 14 34 24 C34 34 24 41 24 41" stroke="#F2B8C6" stroke-width="1.2" fill="none"/>
+      <path d="M24 7 C24 7 14 14 14 24 C14 34 24 41 24 41" stroke="rgba(242,184,198,0.3)" stroke-width="0.5" fill="none"/>
+      <circle cx="24" cy="24" r="3.5" fill="#F2B8C6"/>
+      <path d="M24 17 L26.5 22 L24 21 L21.5 22 Z" fill="rgba(242,184,198,0.6)"/>
+    </svg>
+    <p class="eyebrow">Puerto Varas &nbsp;·&nbsp; Hotel Casona Freire</p>
+    <h1 class="hero-title"><em>Reinvéntate</em></h1>
+    <div class="date-bar">
+      <div class="line"></div>
+      <span>Sábado 30 de Mayo &nbsp;·&nbsp; 11:30 hrs</span>
+      <div class="line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTDOWN -->
+<div class="countdown-wrap">
+  <p class="cd-label">Faltan</p>
+  <div class="cd-grid">
+    <div class="cd-box"><span class="cd-num" id="cd-d">00</span><span class="cd-unit">días</span></div>
+    <div class="cd-box"><span class="cd-num" id="cd-h">00</span><span class="cd-unit">horas</span></div>
+    <div class="cd-box"><span class="cd-num" id="cd-m">00</span><span class="cd-unit">minutos</span></div>
+    <div class="cd-box"><span class="cd-num" id="cd-s">00</span><span class="cd-unit">segundos</span></div>
+  </div>
+  <div class="cupos-wrap">
+    <span class="cupos-label">Cupos</span>
+    <div class="cupos-track"><div class="cupos-fill" id="cupos-fill" style="width:0%"></div></div>
+    <span class="cupos-count"><span id="cupos-num">45</span><small> / 45</small></span>
+  </div>
+</div>
+
+
+<!-- MAIN -->
+<main class="main">
+  <p class="section-tag">La experiencia</p>
+  <p class="intro">Una mañana íntima frente al lago — diseñada para mujeres que están en el momento de volver a sí mismas. No es un evento más. Es un espacio donde sales con algo concreto: claridad sobre quién eres hoy y cómo quieres mostrarte al mundo.</p>
+  <p class="intro" style="margin-top:-16px; font-size:19px;">Un sábado para ti, en uno de los lugares más hermosos del sur de Chile.</p>
+
+  <ul class="experiencia-list">
+    <li>
+      <div><em>Workshop de imagen personal</em><small>Un espacio de reflexión y herramientas prácticas para reconectar con tu estilo y presencia.</small></div>
+    </li>
+    <li>
+      <div><em>Colorimetría</em><small>Para algunas asistentes — descubre la paleta de colores que más favorece tu piel, cabello y ojos.</small></div>
+    </li>
+    <li>
+      <div><em>Coctelería y ambientación</em><small>Bienvenida con coctelería durante toda la mañana, en un entorno cuidado frente al lago Llanquihue.</small></div>
+    </li>
+    <li>
+      <div><em>Registro fotográfico profesional</em><small>Fotos del evento que subiremos a nuestras redes sociales.</small></div>
+    </li>
+  </ul>
+
+  <!-- FORM CARD -->
+  <div class="form-card">
+
+    <!-- STEPS BAR -->
+    <div class="steps-bar">
+      <div class="step-dot active" id="step1-dot">
+        <div class="step-circle">1</div>
+        <span class="step-name">Tus datos</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step-dot" id="step2-dot">
+        <div class="step-circle">2</div>
+        <span class="step-name">Pago</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step-dot" id="step3-dot">
+        <div class="step-circle">3</div>
+        <span class="step-name">Confirmación</span>
+      </div>
+    </div>
+
+    <h2 class="form-title">Reserva tu lugar</h2>
+    <p class="form-sub" id="form-sub">Cupos limitados &nbsp;·&nbsp; <span id="cupos-sub">45 disponibles</span></p>
+
+    <!-- SOLD OUT -->
+    <div id="agotado" class="agotado">
+      <p>Los cupos se han agotado.</p>
+      <p>Escríbenos a reinventate@casarenata.cl para lista de espera. ¡Te avisamos si se libera un cupo!</p>
+    </div>
+
+    <!-- FORM -->
+    <div id="form-body">
+
+      <!-- STEP 1: DATOS PERSONALES -->
+      <div id="step1">
+        <div id="form-alert" class="form-alert error"></div>
+
+        <p class="section-divider">Información personal</p>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Nombre *</label>
+            <input type="text" id="fname" placeholder="Tu nombre" autocomplete="given-name">
+          </div>
+          <div class="field">
+            <label>Apellido *</label>
+            <input type="text" id="lname" placeholder="Tu apellido" autocomplete="family-name">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Correo electrónico *</label>
+          <input type="email" id="email" placeholder="hola@tumail.com" autocomplete="email">
+          <p class="field-hint">Te enviaremos la confirmación aquí</p>
+        </div>
+
+        <div class="field">
+          <label>WhatsApp *</label>
+          <input type="tel" id="phone" placeholder="+56 9 xxxx xxxx" autocomplete="tel">
+        </div>
+
+        <p class="section-divider">Cuéntanos sobre ti</p>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Rango de edad *</label>
+            <select id="edad">
+              <option value="">Selecciona</option>
+              <option>Menor de 35 años</option>
+              <option>35 – 40 años</option>
+              <option>41 – 45 años</option>
+              <option>46 – 50 años</option>
+              <option>51 – 55 años</option>
+              <option>56 años o más</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Ciudad *</label>
+            <select id="ciudad">
+              <option value="">Selecciona</option>
+              <option>Puerto Varas</option>
+              <option>Puerto Montt</option>
+              <option>Osorno</option>
+              <option>Frutillar</option>
+              <option>Castro / Chiloé</option>
+              <option>Otra ciudad</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>¿A qué te dedicas? *</label>
+          <select id="ocupacion">
+            <option value="">Selecciona</option>
+            <option>Emprendedora / dueña de negocio</option>
+            <option>Ejecutiva / profesional dependiente</option>
+            <option>Área de la salud (médica, psicóloga, enfermera...)</option>
+            <option>Nutrición / bienestar / deporte</option>
+            <option>Educación (docente, academia, formación)</option>
+            <option>Derecho / finanzas / contabilidad</option>
+            <option>Arquitectura / ingeniería / construcción</option>
+            <option>Arte / diseño / moda / fotografía</option>
+            <option>Marketing / comunicaciones / RRPP</option>
+            <option>Tecnología / desarrollo / sistemas</option>
+            <option>Gastronomía / turismo / hotelería</option>
+            <option>Sector público / gobierno</option>
+            <option>Dueña de casa / maternidad</option>
+            <option>Jubilada / independiente</option>
+            <option>Estudiante</option>
+            <option>Otro rubro</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>¿Cómo nos conociste?</label>
+          <select id="source">
+            <option value="">Selecciona</option>
+            <option>Instagram de Reinvéntate</option>
+            <option>Me lo recomendó una amiga</option>
+            <option>Por las fundadoras de Reinvéntate</option>
+            <option>Facebook</option>
+            <option>WhatsApp / Grupo</option>
+            <option>Otro</option>
+          </select>
+        </div>
+
+        <button class="btn-submit" onclick="goToStep2()">
+          <span class="btn-text">Continuar al pago →</span>
+        </button>
+      </div>
+
+      <!-- STEP 2: PAGO -->
+      <div id="step2" style="display:none;">
+        <div id="form-alert-2" class="form-alert error"></div>
+
+        <div class="price-box">
+          <div>
+            <div class="price-label">Valor de inscripción</div>
+            <div class="price-amount">$25.000</div>
+          </div>
+          <div class="price-note">Pago por<br>transferencia<br>bancaria</div>
+        </div>
+
+        <div class="transfer">
+          <div class="transfer-title">Datos de transferencia</div>
+          <div class="tr">
+            <span class="tr-k">Titular</span>
+            <span class="tr-v">Casa Renata Spa <button class="copy-btn" onclick="copyText('Casa Renata Spa')">copiar</button></span>
+          </div>
+          <div class="tr">
+            <span class="tr-k">RUT</span>
+            <span class="tr-v">77.584.271-7 <button class="copy-btn" onclick="copyText('77.584.271-7')">copiar</button></span>
+          </div>
+          <div class="tr">
+            <span class="tr-k">Banco</span>
+            <span class="tr-v">Banco Santander</span>
+          </div>
+          <div class="tr">
+            <span class="tr-k">Tipo</span>
+            <span class="tr-v">Cuenta Corriente</span>
+          </div>
+          <div class="tr">
+            <span class="tr-k">N° Cuenta</span>
+            <span class="tr-v">0-000-8887815-9 <button class="copy-btn" onclick="copyText('0-000-8887815-9')">copiar</button></span>
+          </div>
+          <div class="tr">
+            <span class="tr-k">Email</span>
+            <span class="tr-v">reinventate@casarenata.cl <button class="copy-btn" onclick="copyText('reinventate@casarenata.cl')">copiar</button></span>
+          </div>
+          <div class="tr">
+            <span class="tr-k">Monto</span>
+            <span class="tr-v">$25.000 <button class="copy-btn" onclick="copyText('25000')">copiar</button></span>
+          </div>
+        </div>
+
+        <p class="section-divider">Adjunta tu comprobante</p>
+
+        <div class="field">
+          <label>Comprobante de transferencia *</label>
+          <div class="upload-zone" id="upload-zone">
+            <input type="file" id="comprobante" accept="image/*,.pdf" onchange="handleFileSelect(this)">
+            <div id="upload-placeholder">
+              <div class="upload-icon">📎</div>
+              <p class="upload-text"><strong>Adjunta tu comprobante</strong></p>
+              <p class="upload-text" style="font-size:11px; margin-top:4px;">Foto o captura de pantalla · JPG, PNG o PDF</p>
+            </div>
+            <div class="upload-preview" id="upload-preview">
+              <img id="preview-img" src="" alt="Comprobante">
+              <div class="upload-preview-name" id="preview-name">
+                <span class="upload-success-icon">✓</span>
+                <span id="file-name-text"></span>
+                <button class="upload-remove" onclick="removeFile(event)">✕</button>
+              </div>
+            </div>
+          </div>
+          <p class="field-hint">Esto agiliza la confirmación de tu cupo</p>
+        </div>
+
+        <div class="field" style="margin-top:8px;">
+          <label>Nombre en la transferencia *</label>
+          <input type="text" id="nombre-transfer" placeholder="Nombre con que aparece la transferencia">
+          <p class="field-hint">Tal como aparece en el comprobante de tu banco</p>
+        </div>
+
+        <button class="btn-submit" id="btn-submit" onclick="handleSubmit()">
+          <div class="spinner"></div>
+          <span class="btn-text">Confirmar inscripción</span>
+        </button>
+        <p style="text-align:center; margin-top:14px;">
+          <button onclick="backToStep1()" style="background:none;border:none;cursor:pointer;font-size:12px;color:rgba(107,18,38,0.4);letter-spacing:1px;text-decoration:underline;font-family:'Barlow Condensed',sans-serif;">← Volver a mis datos</button>
+        </p>
+        <p class="disclaimer">Al enviar, recibirás un email de confirmación y te contactaremos por WhatsApp para verificar tu pago y asegurar tu cupo.</p>
+      </div>
+
+    </div><!-- /form-body -->
+
+    <!-- SUCCESS -->
+    <div class="success" id="success">
+      <div class="success-header">
+        <div class="success-mark">✦</div>
+        <h3>¡Tu lugar está reservado!</h3>
+        <p class="success-sub">Inscripción recibida · Pendiente confirmación</p>
+      </div>
+
+      <div class="success-card">
+        <div class="success-card-title">Tu inscripción</div>
+        <div class="success-row"><span>Nombre</span><span id="success-name"></span></div>
+        <div class="success-row"><span>Correo</span><span id="success-email"></span></div>
+        <div class="success-row"><span>WhatsApp</span><span id="success-phone"></span></div>
+        <div class="success-row"><span>Evento</span><span>Sábado 30 mayo · 11:30 hrs</span></div>
+        <div class="success-row"><span>Lugar</span><span>Hotel Casona Freire</span></div>
+      </div>
+
+      <p style="font-size:12px;color:rgba(107,18,38,0.45);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;">Próximos pasos</p>
+      <ol class="success-steps">
+        <li>Revisa tu correo — te enviamos un email de confirmación ahora mismo.</li>
+        <li>Verificaremos tu transferencia en las próximas horas hábiles.</li>
+        <li>Una vez confirmado el pago, recibirás tu cupo asegurado por WhatsApp.</li>
+        <li>El sábado 30 de mayo, te esperamos a las 11:30 hrs frente al lago 🌊</li>
+      </ol>
+
+      <a id="wa-link" href="#" target="_blank" class="btn-wa">
+        <span class="wa-icon">💬</span>
+        Enviar comprobante por WhatsApp
+      </a>
+      <p class="disclaimer" style="margin-top:10px;">Si tienes dudas: reinventate@casarenata.cl</p>
+    </div>
+
+  </div><!-- /form-card -->
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">Reinvéntate</div>
+  <div class="footer-contact">reinventate@casarenata.cl &nbsp;·&nbsp; @reinventate.chile</div>
+</footer>
+
+<script>
+// ══════════════════════════════════════════════════════
+// ⚙️  CONFIGURACIÓN — edita estos valores
+// ══════════════════════════════════════════════════════
+
+var CONFIG = {
+  TOTAL_CUPOS:    45,
+
+  // Pega aquí la URL de tu Google Apps Script Web App
+  // (te explico cómo obtenerla en la guía de setup)
+  APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxxXtpV4il2Auzp9gbJDG8G5LfpnS0YJHdiejWAOnoCFyI0oiFPeGIJ2WBbrL_Wd8WF/exec',
+
+  // Para contar cupos desde Google Sheets (opcional pero recomendado)
+  // Pega la URL del CSV publicado de tu celda de cupos confirmados
+  SHEETS_CSV_URL: '',
+
+  WA_NUMBER:   '+56988432910',
+  EVENT_DATE:  new Date('2026-05-30T11:30:00-04:00'),
+};
+
+// ══════════════════════════════════════════════════════
+// ESTADO GLOBAL
+// ══════════════════════════════════════════════════════
+var formData  = {};
+var fileData  = null;
+
+// ══════════════════════════════════════════════════════
+// CUPOS — actualiza desde Google Sheets si hay URL
+// ══════════════════════════════════════════════════════
+var cuposUsados = 0;
+
+function updateCuposDisplay(usados) {
+  cuposUsados = usados;
+  var restantes = Math.max(0, CONFIG.TOTAL_CUPOS - usados);
+  var pct = (usados / CONFIG.TOTAL_CUPOS) * 100;
+  document.getElementById('cupos-fill').style.width = pct + '%';
+  document.getElementById('cupos-num').textContent = restantes;
+  var subEl = document.getElementById('cupos-sub');
+
+  if (restantes <= 0) {
+    subEl.textContent = 'Cupos agotados';
+    document.getElementById('form-body').style.display = 'none';
+    document.getElementById('agotado').style.display = 'block';
+  } else if (restantes <= 5) {
+    subEl.innerHTML = '<span class="cupos-urgente">¡Solo quedan ' + restantes + ' cupos!</span>';
+  } else if (restantes <= 10) {
+    subEl.textContent = '¡Quedan ' + restantes + ' cupos!';
+    subEl.style.color = '#6B1226';
+  } else {
+    subEl.textContent = restantes + ' disponibles';
+  }
+}
+
+function fetchCupos() {
+  if (!CONFIG.SHEETS_CSV_URL) return;
+  fetch(CONFIG.SHEETS_CSV_URL + '&t=' + Date.now())
+    .then(function(r) { return r.text(); })
+    .then(function(t) {
+      var n = parseInt(t.split('\n')[1]);
+      if (!isNaN(n)) updateCuposDisplay(n);
+    })
+    .catch(function() {});
+}
+
+updateCuposDisplay(0); // valor inicial; 0 = todos disponibles
+fetchCupos();
+setInterval(fetchCupos, 60000); // refresca cada minuto
+
+// ══════════════════════════════════════════════════════
+// COUNTDOWN
+// ══════════════════════════════════════════════════════
+function tick() {
+  var diff = Math.max(0, CONFIG.EVENT_DATE.getTime() - Date.now());
+  var d = Math.floor(diff / 86400000);
+  var h = Math.floor((diff % 86400000) / 3600000);
+  var m = Math.floor((diff % 3600000) / 60000);
+  var s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-d').textContent = String(d).padStart(2,'0');
+  document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+  // pulso visual al cambiar segundos
+  var box = document.querySelectorAll('.cd-box')[3];
+  box.classList.add('pulse');
+  setTimeout(function(){ box.classList.remove('pulse'); }, 300);
+}
+tick(); setInterval(tick, 1000);
+
+// ══════════════════════════════════════════════════════
+// UPLOAD COMPROBANTE
+// ══════════════════════════════════════════════════════
+function handleFileSelect(input) {
+  var file = input.files[0];
+  if (!file) return;
+  fileData = file;
+  document.getElementById('file-name-text').textContent = file.name;
+
+  if (file.type.startsWith('image/')) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('preview-img').src = e.target.result;
+      document.getElementById('preview-img').style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  } else {
+    document.getElementById('preview-img').style.display = 'none';
+  }
+  document.getElementById('upload-placeholder').style.display = 'none';
+  document.getElementById('upload-preview').style.display = 'block';
+  document.getElementById('upload-zone').classList.add('dragover');
+}
+
+function removeFile(e) {
+  e.stopPropagation();
+  fileData = null;
+  document.getElementById('comprobante').value = '';
+  document.getElementById('upload-placeholder').style.display = 'block';
+  document.getElementById('upload-preview').style.display = 'none';
+  document.getElementById('upload-zone').classList.remove('dragover');
+}
+
+// drag & drop
+var zone = document.getElementById('upload-zone');
+zone.addEventListener('dragover', function(e) { e.preventDefault(); zone.classList.add('dragover'); });
+zone.addEventListener('dragleave', function() { if (!fileData) zone.classList.remove('dragover'); });
+zone.addEventListener('drop', function(e) {
+  e.preventDefault();
+  var f = e.dataTransfer.files[0];
+  if (f) {
+    var input = document.getElementById('comprobante');
+    var dt = new DataTransfer(); dt.items.add(f); input.files = dt.files;
+    handleFileSelect(input);
+  }
+});
+
+// ══════════════════════════════════════════════════════
+// COPY TO CLIPBOARD
+// ══════════════════════════════════════════════════════
+function copyText(text) {
+  // strip any trailing button text
+  text = text.replace(/copiar$/, '').trim();
+  navigator.clipboard.writeText(text).then(function() {
+    // brief feedback
+    var toast = document.createElement('div');
+    toast.textContent = '¡Copiado!';
+    toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#3D0A16;color:#FAE8EC;padding:10px 22px;border-radius:4px;font-size:12px;letter-spacing:1px;z-index:9999;animation:slideUp 0.25s ease';
+    document.body.appendChild(toast);
+    setTimeout(function(){ document.body.removeChild(toast); }, 1800);
+  });
+}
+
+// ══════════════════════════════════════════════════════
+// NAVEGACIÓN ENTRE PASOS
+// ══════════════════════════════════════════════════════
+function goToStep2() {
+  var fname  = document.getElementById('fname').value.trim();
+  var lname  = document.getElementById('lname').value.trim();
+  var email  = document.getElementById('email').value.trim();
+  var phone  = document.getElementById('phone').value.trim();
+  var edad   = document.getElementById('edad').value;
+  var ciudad = document.getElementById('ciudad').value;
+  var ocup   = document.getElementById('ocupacion').value;
+
+  var errEl = document.getElementById('form-alert');
+  errEl.classList.remove('show');
+
+  // Limpiar errores previos
+  ['fname','lname','email','phone','edad','ciudad','ocupacion'].forEach(function(id) {
+    document.getElementById(id).classList.remove('error');
+  });
+
+  var errors = [];
+  if (!fname)  { errors.push('nombre'); document.getElementById('fname').classList.add('error'); }
+  if (!lname)  { errors.push('apellido'); document.getElementById('lname').classList.add('error'); }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    errors.push('correo válido'); document.getElementById('email').classList.add('error');
+  }
+  if (!phone)  { errors.push('WhatsApp'); document.getElementById('phone').classList.add('error'); }
+  if (!edad)   { errors.push('rango de edad'); document.getElementById('edad').classList.add('error'); }
+  if (!ciudad) { errors.push('ciudad'); document.getElementById('ciudad').classList.add('error'); }
+  if (!ocup)   { errors.push('ocupación'); document.getElementById('ocupacion').classList.add('error'); }
+
+  if (errors.length > 0) {
+    errEl.textContent = 'Por favor completa: ' + errors.join(', ') + '.';
+    errEl.classList.add('show');
+    return;
+  }
+
+  formData = { fname, lname, email, phone, edad, ciudad,
+    ocupacion: document.getElementById('ocupacion').value,
+    source: document.getElementById('source').value };
+
+  // Actualizar steps
+  document.getElementById('step1-dot').classList.remove('active');
+  document.getElementById('step1-dot').classList.add('done');
+  document.getElementById('step2-dot').classList.add('active');
+
+  document.getElementById('step1').style.display = 'none';
+  document.getElementById('step2').style.display = 'block';
+  window.scrollTo({ top: document.querySelector('.form-card').offsetTop - 20, behavior: 'smooth' });
+
+  // Pre-fill nombre-transfer si está vacío
+  if (!document.getElementById('nombre-transfer').value) {
+    document.getElementById('nombre-transfer').value = fname + ' ' + lname;
+  }
+}
+
+function backToStep1() {
+  document.getElementById('step1').style.display = 'block';
+  document.getElementById('step2').style.display = 'none';
+  document.getElementById('step1-dot').classList.add('active');
+  document.getElementById('step1-dot').classList.remove('done');
+  document.getElementById('step2-dot').classList.remove('active');
+}
+
+// ══════════════════════════════════════════════════════
+// SUBMIT
+// ══════════════════════════════════════════════════════
+function handleSubmit() {
+  var nombreTransfer = document.getElementById('nombre-transfer').value.trim();
+  var errEl = document.getElementById('form-alert-2');
+  errEl.classList.remove('show');
+
+  if (!nombreTransfer) {
+    errEl.textContent = 'Por favor ingresa el nombre que aparece en tu transferencia.';
+    errEl.classList.add('show');
+    return;
+  }
+  if (!fileData) {
+    errEl.textContent = 'Por favor adjunta el comprobante de tu transferencia.';
+    errEl.classList.add('show');
+    return;
+  }
+
+  // UI loading
+  var btn = document.getElementById('btn-submit');
+  btn.classList.add('loading');
+  btn.disabled = true;
+
+  var timestamp = new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' });
+  var payload = Object.assign({}, formData, {
+    nombreTransfer: nombreTransfer,
+    timestamp: timestamp,
+    cuposDisponibles: CONFIG.TOTAL_CUPOS - cuposUsados
+  });
+
+  // Si hay Apps Script configurado, enviar ahí (con archivo)
+  if (CONFIG.APPS_SCRIPT_URL !== 'PEGA_AQUI_TU_URL_DE_APPS_SCRIPT') {
+    var formObj = new FormData();
+    Object.keys(payload).forEach(function(k) { formObj.append(k, payload[k]); });
+    if (fileData) formObj.append('comprobante', fileData, fileData.name);
+
+    fetch(CONFIG.APPS_SCRIPT_URL, { method: 'POST', body: formObj })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.result === 'success' || data.status === 'ok') {
+          showSuccess();
+        } else {
+          showError(errEl, 'Ocurrió un error al enviar. Intenta nuevamente.');
+          btn.classList.remove('loading'); btn.disabled = false;
+        }
+      })
+      .catch(function() {
+        // Si falla el servidor, igual mostramos éxito y abrimos WhatsApp
+        showSuccess();
+      });
+  } else {
+    // Sin Apps Script: simular éxito y abrir WhatsApp
+    setTimeout(showSuccess, 800);
+  }
+}
+
+function showSuccess() {
+  // Actualizar steps
+  document.getElementById('step2-dot').classList.remove('active');
+  document.getElementById('step2-dot').classList.add('done');
+  document.getElementById('step3-dot').classList.add('active');
+
+  // Llenar success card
+  document.getElementById('success-name').textContent  = formData.fname + ' ' + formData.lname;
+  document.getElementById('success-email').textContent = formData.email;
+  document.getElementById('success-phone').textContent = formData.phone;
+
+  // Ocultar form, mostrar success
+  document.getElementById('form-body').style.display = 'none';
+  document.getElementById('success').classList.add('show');
+
+  // Link de WhatsApp
+  var msg = encodeURIComponent(
+    '¡Hola Reinvéntate! Me inscribí al evento del 30 de mayo 🌸\n\n' +
+    'Nombre: ' + formData.fname + ' ' + formData.lname + '\n' +
+    'Email: ' + formData.email + '\n' +
+    'WhatsApp: ' + formData.phone + '\n' +
+    'Nombre en transferencia: ' + document.getElementById('nombre-transfer').value + '\n\n' +
+    'Adjunto mi comprobante de pago.'
+  );
+  document.getElementById('wa-link').href = 'https://wa.me/' + CONFIG.WA_NUMBER + '?text=' + msg;
+
+  window.scrollTo({ top: document.querySelector('.form-card').offsetTop - 20, behavior: 'smooth' });
+
+  // Actualizar cupos localmente
+  updateCuposDisplay(cuposUsados + 1);
+}
+
+function showError(el, msg) {
+  el.textContent = msg;
+  el.classList.add('show');
+}
+</script>
+</body>
+</html>
