@@ -686,12 +686,12 @@
         <div class="transfer">
           <div class="transfer-title">Datos de transferencia</div>
           <div class="tr">
-            <span class="tr-k">Titular</span>
-            <span class="tr-v">Casa Renata Spa <button class="copy-btn" onclick="copyText('Casa Renata Spa')">copiar</button></span>
+           <span class="tr-k">Titular</span>
+            <span class="tr-v">Casa Renata Spa</span>
           </div>
           <div class="tr">
             <span class="tr-k">RUT</span>
-            <span class="tr-v">77.584.271-7 <button class="copy-btn" onclick="copyText('77.584.271-7')">copiar</button></span>
+            <span class="tr-v">77.584.271-7</span>
           </div>
           <div class="tr">
             <span class="tr-k">Banco</span>
@@ -703,15 +703,15 @@
           </div>
           <div class="tr">
             <span class="tr-k">N° Cuenta</span>
-            <span class="tr-v">0-000-8887815-9 <button class="copy-btn" onclick="copyText('0-000-8887815-9')">copiar</button></span>
+            <span class="tr-v">0-000-8887815-9</span>
           </div>
           <div class="tr">
             <span class="tr-k">Email</span>
-            <span class="tr-v">reinventate@casarenata.cl <button class="copy-btn" onclick="copyText('reinventate@casarenata.cl')">copiar</button></span>
+            <span class="tr-v">reinventate@casarenata.cl</span>
           </div>
           <div class="tr">
             <span class="tr-k">Monto</span>
-            <span class="tr-v">$25.000 <button class="copy-btn" onclick="copyText('25000')">copiar</button></span>
+            <span class="tr-v">$25.000</span>
           </div>
         </div>
 
@@ -935,8 +935,20 @@ zone.addEventListener('drop', function(e) {
 // COPY TO CLIPBOARD
 // ══════════════════════════════════════════════════════
 function copyText(text) {
-  // strip any trailing button text
   text = text.replace(/copiar$/, '').trim();
+  showToast('¡Copiado!');
+  navigator.clipboard.writeText(text).catch(function() {});
+}
+ 
+function copyAllTransfer() {
+  var texto =
+    'Titular: Casa Renata Spa\n' +
+    'RUT: 77.584.271-7\n' +
+    'Banco: Banco Santander\n' +
+    'Tipo: Cuenta Corriente\n' +
+    'N° Cuenta: 0-000-8887815-9\n' +
+    'Email: reinventate@casarenata.cl\n' +
+    'Monto: $25.000';
   navigator.clipboard.writeText(text).then(function() {
     // brief feedback
     var toast = document.createElement('div');
