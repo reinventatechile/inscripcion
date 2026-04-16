@@ -262,8 +262,30 @@
     }
 
     function verificar(token) {
-      if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.indexOf('https://script.google.com/macros/s/AKfycbxwLZC7ZsiKhP1R3kSLjc1CpgSJhVIiFL_d3fLIPSuDDPF3YcfCdQxFilkobzbnPkcL/exec') !== -1) {
+function verificar(token) {
+  var url = APPS_SCRIPT_URL + '?action=verificar&token=' + encodeURIComponent(token);
+  fetch(url)
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.ok) {
+        document.getElementById('nombre-inscrita').textContent = data.nombre;
+        mostrar('ok');
+      } else if (!data.encontrado) {
         mostrar('error');
+        document.getElementById('titulo-error').textContent = 'Código no encontrado';
+        document.getElementById('desc-error').textContent = 'Este QR no corresponde a ninguna inscripción. Contacta al equipo: reinventate@casarenata.cl';
+      } else {
+        mostrar('error');
+        document.getElementById('titulo-error').textContent = 'Pendiente de confirmación';
+        document.getElementById('desc-error').textContent = 'La inscripción de ' + (data.nombre || '') + ' aún no ha sido confirmada. Contacta al equipo.';
+      }
+    })
+    .catch(function() {
+      mostrar('error');
+      document.getElementById('titulo-error').textContent = 'Error de conexión';
+      document.getElementById('desc-error').textContent = 'No se pudo verificar. Revisa tu conexión e intenta de nuevo.';
+    });
+}
         document.getElementById('titulo-error').textContent = 'Sistema no configurado';
         document.getElementById('desc-error').textContent = 'La URL del sistema no está configurada. Contacta al equipo.';
         return;
