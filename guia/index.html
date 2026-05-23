@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía Reinvéntate — Conviértete en quien deseas ser</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+  :root {
+    --burdeo:     #590C1B;
+    --terra:      #8C3535;
+    --rosa-mid:   #D9A0AB;
+    --rosa-light: #F2D8DC;
+    --crema:      #F2EFEB;
+    --negro:      #1a0a0f;
+    --gris:       #5a4a4e;
+    --gris-claro: #8a7a7e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--crema);
+    color: var(--negro);
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  /* ─── PORTADA ──────────────────────────────────────────────── */
+  .cover {
+    background: var(--burdeo);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 64px 40px;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 25% 15%, rgba(217,160,171,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 80% 85%, rgba(140,53,53,0.35) 0%, transparent 50%);
+  }
+  .cover-content { position: relative; z-index: 1; max-width: 560px; }
+  .cover-eyebrow {
+    font-size: 11px; font-weight: 500; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--rosa-mid); margin-bottom: 32px;
+  }
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 6vw, 52px);
+    font-weight: 400; color: var(--crema);
+    line-height: 1.15; margin-bottom: 22px;
+  }
+  .cover-title em { font-style: italic; color: var(--rosa-mid); }
+  .cover-sub {
+    font-size: 15px; font-weight: 300;
+    color: rgba(242,239,235,0.68);
+    line-height: 1.8; margin-bottom: 44px;
+    max-width: 440px; margin-left: auto; margin-right: auto;
+  }
+  .cover-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(217,160,171,0.15);
+    border: 1px solid rgba(217,160,171,0.32);
+    border-radius: 50px; padding: 10px 24px;
+    font-size: 12px; color: var(--rosa-mid); letter-spacing: 0.5px;
+  }
+  .cover-footer {
+    position: absolute; bottom: 28px; left: 0; right: 0;
+    text-align: center; font-size: 11px;
+    color: rgba(242,239,235,0.3);
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+
+  /* ─── PÁGINAS ──────────────────────────────────────────────── */
+  .page {
+    max-width: 700px; margin: 0 auto;
+    padding: 64px 52px;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  /* ─── TIPOGRAFÍA ────────────────────────────────────────────── */
+  .eyebrow {
+    font-size: 10px; font-weight: 600; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--terra); margin-bottom: 12px;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 4vw, 30px); font-weight: 400;
+    color: var(--burdeo); line-height: 1.25; margin-bottom: 22px;
+  }
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px; font-weight: 500;
+    color: var(--burdeo); margin: 34px 0 10px;
+  }
+  p { color: var(--gris); margin-bottom: 16px; font-size: 14px; line-height: 1.82; }
+  strong { color: var(--negro); font-weight: 600; }
+  em { color: var(--terra); font-style: italic; }
+
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--rosa-mid), transparent);
+    margin: 36px 0;
+  }
+
+  /* ─── CITA ─────────────────────────────────────────────────── */
+  .quote {
+    background: var(--burdeo); border-radius: 16px;
+    padding: 28px 32px; margin: 28px 0;
+  }
+  .quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px; font-style: italic;
+    color: var(--crema); line-height: 1.7; margin: 0 0 10px;
+  }
+  .quote cite {
+    font-size: 10px; color: var(--rosa-mid);
+    letter-spacing: 1.5px; text-transform: uppercase; font-style: normal;
+  }
+
+  /* ─── DATO CIENTÍFICO ──────────────────────────────────────── */
+  .fact-box {
+    background: var(--rosa-light);
+    border-left: 4px solid var(--burdeo);
+    border-radius: 0 14px 14px 0;
+    padding: 18px 22px; margin: 24px 0;
+  }
+  .fact-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--burdeo); margin-bottom: 7px;
+  }
+  .fact-box p { font-size: 13px; color: var(--negro); margin: 0; line-height: 1.7; }
+  .fact-box strong { color: var(--burdeo); }
+
+  /* ─── ESTADÍSTICAS ─────────────────────────────────────────── */
+  .stat-row {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; margin: 28px 0;
+  }
+  .stat-box {
+    text-align: center; background: #fff;
+    border: 1px solid var(--rosa-light);
+    border-radius: 14px; padding: 22px 14px;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px; font-weight: 400;
+    color: var(--burdeo); display: block; margin-bottom: 5px;
+  }
+  .stat-label { font-size: 11px; color: var(--gris-claro); line-height: 1.45; }
+
+  /* ─── VISUALIZACIÓN (burbuja especial) ─────────────────────── */
+  .visualization {
+    background: linear-gradient(145deg, #2a0710 0%, var(--burdeo) 60%, #7a2a2a 100%);
+    border-radius: 20px; padding: 40px 36px; margin: 32px 0; color: var(--crema);
+  }
+  .visualization .vis-label {
+    font-size: 10px; font-weight: 600; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--rosa-mid); margin-bottom: 14px;
+  }
+  .visualization h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px; font-weight: 400;
+    color: var(--crema); margin-bottom: 18px; line-height: 1.3;
+  }
+  .visualization p {
+    font-size: 13.5px; color: rgba(242,239,235,0.78);
+    margin-bottom: 12px; line-height: 1.85;
+  }
+  .visualization .vis-step {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 11px 0; border-bottom: 1px solid rgba(217,160,171,0.15);
+  }
+  .visualization .vis-step:last-child { border: none; }
+  .visualization .vis-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; color: var(--rosa-mid);
+    line-height: 1; flex-shrink: 0; margin-top: 2px;
+  }
+  .visualization .vis-text {
+    font-size: 13.5px; color: rgba(242,239,235,0.82); line-height: 1.7; margin: 0;
+  }
+  .visualization .vis-note {
+    margin-top: 20px; padding-top: 16px;
+    border-top: 1px solid rgba(217,160,171,0.2);
+    font-size: 12px; color: rgba(217,160,171,0.7);
+    font-style: italic; text-align: center;
+  }
+
+  /* ─── EJERCICIOS ───────────────────────────────────────────── */
+  .exercise {
+    background: #fff; border: 1px solid var(--rosa-light);
+    border-radius: 18px; padding: 28px 30px; margin: 28px 0;
+  }
+  .exercise-label {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--terra); margin-bottom: 12px;
+  }
+  .exercise-label::before { content: '✦'; color: var(--rosa-mid); font-size: 12px; }
+  .exercise h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px; font-weight: 500; color: var(--burdeo); margin-bottom: 12px;
+  }
+  .exercise p { font-size: 13.5px; color: var(--gris); margin-bottom: 10px; }
+  .exercise ol { padding-left: 18px; }
+  .exercise ol li { font-size: 13.5px; color: var(--gris); margin-bottom: 9px; line-height: 1.65; }
+  .exercise .ex-quote {
+    background: var(--crema); border-radius: 10px;
+    padding: 14px 18px; margin: 14px 0;
+    font-style: italic; font-size: 13px; color: var(--burdeo);
+    border-left: 3px solid var(--rosa-mid);
+  }
+  .exercise .ex-tip {
+    margin-top: 14px; padding-top: 12px;
+    border-top: 1px dashed var(--rosa-light);
+    font-size: 12px; color: var(--gris-claro); font-style: italic;
+  }
+
+  /* ─── LISTA CHECKEO ────────────────────────────────────────── */
+  .check-list { list-style: none; padding: 0; margin: 20px 0; }
+  .check-list li {
+    display: flex; gap: 12px; align-items: flex-start;
+    font-size: 14px; color: var(--gris);
+    padding: 10px 0; border-bottom: 1px solid var(--rosa-light);
+    line-height: 1.6;
+  }
+  .check-list li:last-child { border: none; }
+  .check-list li::before { content: '✦'; color: var(--rosa-mid); font-size: 11px; margin-top: 4px; flex-shrink: 0; }
+  .check-list strong { color: var(--burdeo); }
+
+  /* ─── SECCIÓN FOMO ─────────────────────────────────────────── */
+  .fomo-section {
+    background: var(--burdeo); border-radius: 20px;
+    padding: 46px 42px; text-align: center; margin: 40px 0;
+  }
+  .fomo-section .eyebrow { color: var(--rosa-mid); }
+  .fomo-section h2 { color: var(--crema); font-size: clamp(20px, 3.5vw, 28px); margin-bottom: 16px; }
+  .fomo-section > p { color: rgba(242,239,235,0.72); max-width: 480px; margin: 0 auto 28px; }
+  .fomo-list { list-style: none; padding: 0; margin: 0 0 32px; text-align: left; max-width: 420px; margin-left: auto; margin-right: auto; }
+  .fomo-list li {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 11px 0; border-bottom: 1px solid rgba(242,216,220,0.14);
+    font-size: 13.5px; color: rgba(242,239,235,0.8); line-height: 1.6;
+  }
+  .fomo-list li:last-child { border: none; }
+  .fomo-list .icon { color: var(--rosa-mid); flex-shrink: 0; margin-top: 2px; }
+  .fomo-list strong { color: var(--rosa-mid); }
+  .fomo-cta {
+    display: inline-block; background: var(--rosa-mid);
+    color: var(--burdeo); padding: 15px 36px;
+    border-radius: 50px; font-size: 13px; font-weight: 700;
+    letter-spacing: 0.5px; text-decoration: none; margin-top: 8px;
+  }
+  .fomo-urgency { margin-top: 16px; font-size: 11px; color: rgba(242,216,220,0.5); letter-spacing: 0.5px; }
+
+  /* ─── PRINT ─────────────────────────────────────────────────── */
+  @media print {
+    .cover, .quote, .fomo-section, .fact-box, .visualization {
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    }
+  }
+  @media (max-width: 600px) {
+    .page { padding: 40px 22px; }
+    .cover { padding: 50px 24px; }
+    .fomo-section { padding: 32px 22px; }
+    .visualization { padding: 28px 22px; }
+    .stat-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ PORTADA ══════════════════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-content">
+    <p class="cover-eyebrow">Reinvéntate · Puerto Varas</p>
+    <h1 class="cover-title">
+      Conviértete en<br><em>quien deseas ser</em>
+    </h1>
+    <p class="cover-sub">
+      Una guía de neurociencia y psicología profunda para entender por qué nos cuesta tanto cambiar — y los pasos concretos para empezar a construir la versión de ti que ya sabes que existe.
+    </p>
+    <div class="cover-badge">Descarga gratuita · Comunidad Reinvéntate</div>
+  </div>
+  <div class="cover-footer">reinventate.cl · Puerto Varas, Chile</div>
+</div>
+
+<!-- ══ PÁGINA 1: EL PUNTO DE PARTIDA ════════════════════════════ -->
+<div class="page">
+  <p class="eyebrow">El punto de partida</p>
+  <h2>¿Y si tu futuro no lo determinan tus circunstancias, sino los patrones que tu cerebro repite cada día?</h2>
+
+  <p>Esta pregunta, vista desde la psicología y la neurociencia, lo cambia todo. Porque si la realidad está moldeada por patrones internos — entonces el cambio no empieza afuera. Empieza adentro.</p>
+
+  <p>Crear la realidad que deseas no se trata de forzar resultados ni de pensar positivo. Se trata de <strong>convertirte en el tipo de persona que puede sostener la vida que desea</strong>.</p>
+
+  <p>Esta idea tiene base sólida en la psicología y la neurociencia — especialmente en el trabajo de Carl Jung, Martin Seligman y Joe Dispenza. Sus enfoques son distintos, pero convergen en una idea central: <strong>nuestro mundo interior da forma a nuestra experiencia exterior</strong>.</p>
+
+  <div class="quote">
+    <p>"Hasta que lo inconsciente no se haga consciente, el subconsciente seguirá dirigiendo tu vida y tú le llamarás destino."</p>
+    <cite>— Carl Jung</cite>
+  </div>
+
+  <p>El primer paso en este proceso es volverse consciente de lo que habitualmente permanece inconsciente. Esto es incómodo. Requiere una observación honesta: cómo reaccionamos emocionalmente, cómo nos comportamos en relaciones, qué tememos, qué evitamos y qué patrones se siguen repitiendo.</p>
+
+  <p>Significa vernos con claridad — no como deseamos ser, sino como realmente somos. No para juzgarnos, sino para entendernos.</p>
+
+  <div class="fact-box">
+    <div class="fact-label">Lo que la neurociencia confirma</div>
+    <p>Los estudios de resonancia magnética (fMRI) del neurocientífico John-Dylan Haynes demuestran que el cerebro prepara una acción hasta <strong>10 segundos antes</strong> de que seamos conscientes de haberla decidido. Lo que llamamos "mi decisión" es frecuentemente la racionalización de algo que ya ocurrió en otro nivel. El 95% de nuestras decisiones son inconscientes.</p>
+  </div>
+
+  <p>Durante mucho tiempo se creyó que sanar significaba revisitar el pasado indefinidamente. Sin embargo, desde la psicología, la conciencia no está diseñada para atraparnos ahí. <strong>La conciencia crea elección.</strong> Y esa elección es el inicio de todo.</p>
+</div>
+
+<!-- ══ PÁGINA 2: EL MAPA INTERIOR ══════════════════════════════ -->
+<div class="page">
+  <p class="eyebrow">Psicología & Neurociencia</p>
+  <h2>Tres claves que Jung, Seligman y Dispenza comparten</h2>
+
+  <div class="stat-row">
+    <div class="stat-box">
+      <span class="stat-num">95%</span>
+      <div class="stat-label">de tus decisiones son inconscientes (neurociencia cognitiva)</div>
+    </div>
+    <div class="stat-box">
+      <span class="stat-num">21+</span>
+      <div class="stat-label">días mínimos para instalar un nuevo patrón neural consciente</div>
+    </div>
+    <div class="stat-box">
+      <span class="stat-num">10s</span>
+      <div class="stat-label">de anticipación cerebral antes de que "decidas" conscientemente</div>
+    </div>
+  </div>
+
+  <h3>1. Cambia tu narrativa interna (Martin Seligman)</h3>
+  <p>La investigación de Seligman en psicología positiva demuestra que la forma en que interpretamos nuestras experiencias afecta directamente nuestros estados emocionales, nuestras conductas y nuestro bienestar a largo plazo.</p>
+  <p>Pensamientos → emociones → acciones → identidad. Si la historia que nos contamos no cambia, nuestra realidad permanece igual. Cambiar la forma en que pensamos y sentimos no es negación ni autoengaño. Es <strong>entrenamiento cognitivo y emocional intencional</strong>.</p>
+
+  <h3>2. Los hábitos son tu personalidad (Joe Dispenza)</h3>
+  <p>Dispenza explica que cuando pensamos, sentimos y actuamos consistentemente de las mismas maneras, fortalecemos los mismos circuitos cerebrales. Con el tiempo, esos circuitos se convierten en nuestra personalidad. <strong>Y la personalidad crea la realidad personal.</strong></p>
+  <p>Los microhábitos parecen insignificantes, pero son poderosos porque interrumpen patrones antiguos. No se trata solo de disciplina — se trata de transformación de identidad. No te sanas quedándote igual. <strong>Te sanas mientras cambias.</strong></p>
+
+  <div class="fact-box">
+    <div class="fact-label">Neurohábitos · lo que la ciencia del cambio demuestra</div>
+    <p>Desde la neurociencia de los hábitos, todo comportamiento repetido consolida una sinapsis. El cerebro no distingue entre un hábito "bueno" y uno "malo" — solo refuerza lo que se repite. La clave no está en la fuerza de voluntad sino en el <strong>diseño del entorno y la repetición con intención emocional</strong>.</p>
+  </div>
+
+  <h3>3. La meditación como acceso al subconsciente</h3>
+  <p>Tanto Dispenza como las tradiciones de psicología contemplativa señalan la meditación como el mecanismo más eficaz para acceder al subconsciente — no como práctica espiritual, sino como <strong>herramienta de autorregulación del sistema nervioso</strong>.</p>
+  <p>En estado meditativo (ondas cerebrales theta y alfa), el filtro crítico de la mente consciente se relaja. Es precisamente en ese estado donde los patrones inconscientes son más accesibles, y donde la instalación de nuevas creencias e identidades es más efectiva.</p>
+</div>
+
+<!-- ══ PÁGINA 3: VISUALIZACIÓN GUIADA ══════════════════════════ -->
+<div class="page">
+  <p class="eyebrow">Visualización guiada</p>
+  <h2>Conoce a la persona en la que te estás convirtiendo</h2>
+
+  <p>Si puedes imaginar una versión futura de ti, puedes crearla — convirtiéndote en ella primero. Esta práctica combina los principios de Joe Dispenza sobre el "yo cuántico" con la psicología de la identidad. No es fantasear: es <strong>ensayar neurológicamente</strong> quién ya eres en potencia.</p>
+
+  <p>Reserva 15 minutos en un espacio tranquilo. Siéntate cómodamente, cierra los ojos, y recorre estas preguntas lentamente — primero en tu mente, luego por escrito.</p>
+
+  <div class="visualization">
+    <div class="vis-label">Visualización · 15 minutos</div>
+    <h4>Encuentro con tu versión futura</h4>
+
+    <div class="vis-step">
+      <div class="vis-num">1</div>
+      <p class="vis-text"><strong style="color:var(--rosa-mid)">Entra en el espacio.</strong> Cierra los ojos. Respira profundo tres veces. Siente el peso de tu cuerpo en la silla. Deja que tu mente se aquiete. Cuando notes pensamientos, obsérvalos sin seguirlos y vuelve a tu respiración.</p>
+    </div>
+    <div class="vis-step">
+      <div class="vis-num">2</div>
+      <p class="vis-text"><strong style="color:var(--rosa-mid)">Imagina tu vida en 3 años.</strong> ¿Dónde estás? ¿Con quién? ¿Cómo luce tu espacio, tu rutina, tu cuerpo? No lo fuerces — deja que aparezca. Si no aparece nada, está bien. Observa qué sí aparece.</p>
+    </div>
+    <div class="vis-step">
+      <div class="vis-num">3</div>
+      <p class="vis-text"><strong style="color:var(--rosa-mid)">Encuentra a esa versión de ti.</strong> Está frente a ti. Obsérvala: ¿cómo se mueve? ¿Cómo habla? ¿Qué irradia? ¿Qué hay en su mirada que hoy sientes que te falta?</p>
+    </div>
+    <div class="vis-step">
+      <div class="vis-num">4</div>
+      <p class="vis-text"><strong style="color:var(--rosa-mid)">Siente la emoción, no solo la imagen.</strong> Dispenza enfatiza esto: el cerebro aprende con emoción. Permite sentir lo que sentiría esa versión de ti — no el deseo de ser ella, sino la sensación de ya serlo. Gratitud, ligereza, coherencia.</p>
+    </div>
+    <div class="vis-step">
+      <div class="vis-num">5</div>
+      <p class="vis-text"><strong style="color:var(--rosa-mid)">Pregúntale.</strong> ¿Qué soltó para llegar ahí? ¿Qué construyó? ¿Qué le digo a la versión de hoy — la que sostiene esta guía en este momento?</p>
+    </div>
+    <div class="vis-step">
+      <div class="vis-num">6</div>
+      <p class="vis-text"><strong style="color:var(--rosa-mid)">Vuelve.</strong> Respira profundo. Mueve tus manos, tus pies. Abre los ojos despacio. Escribe inmediatamente lo que viste, sentiste o recibiste — antes de que la mente crítica lo racionalice.</p>
+    </div>
+    <div class="vis-note">Cuanto más vívida sea la emoción durante la visualización, más señal envías al cerebro de que ese estado ya es real.</div>
+  </div>
+
+  <p>Después de la visualización, responde por escrito: <em>¿Qué tres cosas necesito soltar para parecerme más a esa versión? ¿Qué una cosa puedo hacer esta semana que ella ya haría?</em></p>
+</div>
+
+<!-- ══ PÁGINA 4: LOS TRES EJERCICIOS ════════════════════════════ -->
+<div class="page">
+  <p class="eyebrow">Práctica diaria</p>
+  <h2>Tres hábitos pequeños que cambian la arquitectura de tu cerebro</h2>
+
+  <p>No son ejercicios de disciplina. Son intervenciones en los momentos exactos donde el cerebro es más plástico y más vulnerable a sus propios patrones.</p>
+
+  <div class="exercise">
+    <div class="exercise-label">Ejercicio 1 · Escritura · 5 minutos</div>
+    <h4>El diario del yo futuro</h4>
+    <p>Una vez por semana (no todos los días — la consistencia importa más que la frecuencia), escribe durante 5 minutos desde la perspectiva de quien ya eres en 3 años.</p>
+    <div class="ex-quote">"Hoy me desperté sintiéndome __________. Lo que más me alegra de mi vida ahora es __________. La versión de mí que solté fue __________."</div>
+    <p>Escribe en tiempo presente, con emoción real. No es visualizar el futuro — es ensayar neurológicamente una identidad. Dispenza llama a esto "memorias del futuro": darle al cerebro experiencias emocionales de lo que aún no ha ocurrido para que deje de tratarlo como ajeno.</p>
+    <div class="ex-tip">Guarda todos los escritos. Releerlos en 6 meses es uno de los ejercicios más poderosos de reconocimiento del cambio.</div>
+  </div>
+
+  <div class="exercise">
+    <div class="exercise-label">Ejercicio 2 · Mañanas · Los primeros 5 minutos</div>
+    <h4>La pausa antes del mundo</h4>
+    <p>Cuando despiertes — antes de tocar el teléfono, antes de las notificaciones, antes del ruido — haz una pausa de 5 minutos. Solo eso.</p>
+    <ol>
+      <li>Quédate en la cama o siéntate. Respira conscientemente.</li>
+      <li>Pregúntate: <em>"¿Quién quiero ser hoy?"</em> — no qué tienes que hacer, sino quién quieres encarnar.</li>
+      <li>Elige una emoción intencional para el día: claridad, apertura, gratitud, calma.</li>
+      <li>Visualiza en 30 segundos cómo luciría ese día vivido desde esa emoción.</li>
+      <li>Recién entonces, levántate.</li>
+    </ol>
+    <div class="ex-tip">Los primeros minutos del día son en estado theta-alfa — el mismo estado que la meditación. Es el momento donde el cerebro es más receptivo a instalar una intención. El teléfono interrumpe ese estado antes de que puedas usarlo.</div>
+  </div>
+
+  <div class="exercise">
+    <div class="exercise-label">Ejercicio 3 · Noches · Antes de dormir</div>
+    <h4>Meditación de cierre</h4>
+    <p>El sueño consolida lo que el cerebro vivió durante el día. Lo que pongas en tu mente en los últimos 10 minutos antes de dormir es lo que el subconsciente procesa toda la noche.</p>
+    <ol>
+      <li>Apaga pantallas al menos 10 minutos antes.</li>
+      <li>Acostada, cierra los ojos y respira hasta que el cuerpo se relaje completamente.</li>
+      <li>Recorre mentalmente el día: sin juzgarlo, solo observarlo. ¿Qué actuó en piloto automático? ¿Qué fue consciente?</li>
+      <li>Termina con una afirmación sentida — no una frase vacía, sino algo que <em>sientas</em> verdadero aunque sea parcialmente: <em>"Estoy aprendiendo a confiar en mí."</em></li>
+      <li>Deja ir. El cerebro hará el resto mientras duermes.</li>
+    </ol>
+    <div class="ex-tip">La meditación antes de dormir no requiere hacerlo "bien". Solo requiere regularidad. El sistema nervioso se autorregula con la práctica — no con la perfección.</div>
+  </div>
+</div>
+
+<!-- ══ PÁGINA 5: LA TRANSFORMACIÓN ══════════════════════════════ -->
+<div class="page">
+  <p class="eyebrow">El proceso</p>
+  <h2>No te sanas quedándote igual.<br>Te sanas mientras cambias.</h2>
+
+  <p>La sanación ocurre en movimiento. A medida que se repiten nuevas conductas, el cerebro se adapta, la regulación emocional mejora y una nueva estructura interna comienza a formarse. En ese proceso de cambio y sanación, emerge una nueva realidad.</p>
+
+  <p>Porque la realidad no es algo que esperamos. Es algo que <strong>encarnamos</strong>.</p>
+
+  <p>Para crear un mundo exterior diferente, primero debemos convertirnos en personas diferentes por dentro. Debemos transformarnos en la versión de nosotras que imaginamos ser — alguien que puede sostener emocional, mental y relacionalmente la vida que desea.</p>
+
+  <div class="quote">
+    <p>"No soy lo que me ocurrió. Soy lo que elegí convertirme."</p>
+    <cite>— Carl Jung</cite>
+  </div>
+
+  <p>Esto no se trata de perfección. Se trata de <strong>coherencia entre tu mundo interior, tus hábitos y tus acciones</strong>.</p>
+
+  <h3>Lo que esta guía no puede darte</h3>
+  <p>Los ejercicios que acabas de leer son poderosos. Y también tienen un límite: el papel no puede reemplazar la experiencia que reconfigura el sistema nervioso en tiempo real.</p>
+  <p>La neurociencia es clara: el aprendizaje más profundo no ocurre al entender intelectualmente algo. Ocurre cuando el cuerpo lo <em>vive</em>, cuando hay emoción real, cuando hay otra persona que actúa como espejo.</p>
+
+  <ul class="check-list">
+    <li><strong>La visualización guiada en grupo</strong> activa la emoción colectiva — que amplifica el efecto individual.</li>
+    <li><strong>Las neuronas espejo</strong> hacen que estar rodeada de mujeres que también están en proceso acelere tu propio proceso.</li>
+    <li><strong>El trabajo de imagen personal en vivo</strong> activa el enclothed cognition desde adentro — no como teoría sino como experiencia.</li>
+    <li><strong>La comunidad sostenida en el tiempo</strong> es el factor de cambio más subestimado — y el más determinante.</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <div class="fomo-section">
+    <p class="eyebrow">Primer evento · Puerto Varas</p>
+    <h2>¿Qué pasa si no vas?</h2>
+    <p>Absolutamente nada. La vida sigue igual. Los mismos patrones. Las mismas reacciones que no entiendes. El mismo "esta vez sí" que no termina de arrancar. El mismo espejo que no te gusta y al que no sabes cómo mirar distinto.</p>
+
+    <ul class="fomo-list">
+      <li><span class="icon">→</span><div><strong>Plazas limitadas</strong> — cuando el grupo se llena, se cierra. No hay lista de espera.</div></li>
+      <li><span class="icon">→</span><div>La experiencia <strong>no se graba</strong> ni se repite igual. El grupo que lo vive la hace única.</div></li>
+      <li><span class="icon">→</span><div>Las mujeres que estén en esa sala construirán una <strong>red real</strong> de sostén mutuo. Eso no se compra después.</div></li>
+      <li><span class="icon">→</span><div>Trabajo en vivo con Paulina Henríquez — <strong>colorimetría, imagen y presencia</strong> como herramientas de identidad.</div></li>
+      <li><span class="icon">→</span><div><strong>$25.000</strong> — lo que cuesta una cena de compromiso con alguien más. Esto es una cena de compromiso contigo.</div></li>
+    </ul>
+
+    <a href="https://reinventatechile.github.io/inscripcion/" class="fomo-cta">Quiero reservar mi lugar →</a>
+    <p class="fomo-urgency">Plazas limitadas · Pago por transferencia tras inscripción</p>
+  </div>
+</div>
+
+<!-- ══ CONTRAPORTADA ═════════════════════════════════════════════ -->
+<div class="cover" style="page-break-after:auto;">
+  <div class="cover-content">
+    <p class="cover-eyebrow">Reinvéntate · Puerto Varas</p>
+    <h1 class="cover-title" style="font-size:clamp(22px,4vw,36px);">
+      Comunidad de mujeres<br><em>que eligen crecer.</em>
+    </h1>
+    <p class="cover-sub">Martina Tereucan &amp; Sandra Galindo</p>
+    <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:4px;">
+      <a href="https://www.instagram.com/reinventate.chile/" style="color:var(--rosa-mid);font-size:12px;letter-spacing:1px;text-decoration:none;">@reinventate.chile</a>
+      <span style="color:rgba(242,216,220,0.3);">·</span>
+      <a href="https://www.tiktok.com/@reinventatechile_" style="color:var(--rosa-mid);font-size:12px;letter-spacing:1px;text-decoration:none;">@reinventatechile_</a>
+    </div>
+  </div>
+  <div class="cover-footer">Esta guía fue creada con neurociencia, psicología y mucho cariño · reinventate.cl</div>
+</div>
+
+</body>
+</html>
