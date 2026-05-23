@@ -513,11 +513,6 @@
     <div class="cd-box"><span class="cd-num" id="cd-m">00</span><span class="cd-unit">minutos</span></div>
     <div class="cd-box"><span class="cd-num" id="cd-s">00</span><span class="cd-unit">segundos</span></div>
   </div>
-  <div class="cupos-wrap">
-    <span class="cupos-label">Cupos</span>
-    <div class="cupos-track"><div class="cupos-fill" id="cupos-fill" style="width:0%"></div></div>
-    <span class="cupos-count"><span id="cupos-num">45</span><small> / 45</small></span>
-  </div>
 </div>
 
 
@@ -561,7 +556,7 @@
     </div>
 
     <h2 class="form-title">Reserva tu lugar</h2>
-    <p class="form-sub" id="form-sub">Cupos limitados &nbsp;·&nbsp; <span id="cupos-sub">45 disponibles</span></p>
+    <p class="form-sub">Plazas limitadas</p>
 
     <!-- SOLD OUT -->
     <div id="agotado" class="agotado">
@@ -835,22 +830,10 @@ var cuposUsados = 0;
 function updateCuposDisplay(usados) {
   cuposUsados = usados;
   var restantes = Math.max(0, CONFIG.TOTAL_CUPOS - usados);
-  var pct = (usados / CONFIG.TOTAL_CUPOS) * 100;
-  document.getElementById('cupos-fill').style.width = pct + '%';
-  document.getElementById('cupos-num').textContent = restantes;
-  var subEl = document.getElementById('cupos-sub');
-
   if (restantes <= 0) {
-    subEl.textContent = 'Cupos agotados';
     document.getElementById('form-body').style.display = 'none';
     document.getElementById('agotado').style.display = 'block';
-  } else if (restantes <= 5) {
-    subEl.innerHTML = '<span class="cupos-urgente">¡Solo quedan ' + restantes + ' cupos!</span>';
-  } else if (restantes <= 10) {
-    subEl.textContent = '¡Quedan ' + restantes + ' cupos!';
-    subEl.style.color = '#6B1226';
   } else {
-    subEl.textContent = restantes + ' disponibles';
   }
 }
 
@@ -1139,3 +1122,4 @@ function showError(el, msg) {
 </script>
 </body>
 </html>
+
