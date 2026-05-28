@@ -270,6 +270,25 @@
   .field-hint { font-size: 11px; color: rgba(107,18,38,0.4); margin-top: 5px; letter-spacing: 0.3px; }
   .field-error { font-size: 11px; color: #C0392B; margin-top: 5px; display: none; }
 
+  /* ─── SELECTOR PAGO ─── */
+  .pay-selector { display: flex; gap: 8px; margin: 20px 0 4px; }
+  .pay-opt {
+    flex: 1; padding: 12px 10px; border-radius: 8px; border: 1.5px solid rgba(107,18,38,0.15);
+    background: #fff; color: var(--burdo); font-size: 12px; font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600; letter-spacing: .5px; cursor: pointer; transition: all .2s; text-align: center;
+  }
+  .pay-opt.active { background: var(--burdo); color: var(--rosa); border-color: var(--burdo); }
+  .pay-opt:hover:not(.active) { border-color: var(--burdo); }
+  .flow-btn-wrap { text-align: center; padding: 8px 0 4px; }
+  .flow-btn {
+    display: inline-block; padding: 14px 36px; background: var(--burdo); color: var(--rosa);
+    border-radius: 4px; font-family: 'Barlow Condensed', sans-serif; font-size: 14px;
+    font-weight: 700; letter-spacing: 1.5px; text-decoration: none; text-transform: uppercase;
+    transition: opacity .2s; width: 100%; text-align: center; box-sizing: border-box;
+  }
+  .flow-btn:hover { opacity: .85; }
+  .flow-info { font-size: 12px; color: rgba(107,18,38,0.5); text-align: center; margin: 10px 0 0; line-height: 1.6; }
+
   /* ─── PRICE BOX ─── */
   .price-box {
     background: var(--burdo); border-radius: 6px;
@@ -670,87 +689,86 @@
       <div id="step2" style="display:none;">
         <div id="form-alert-2" class="form-alert error"></div>
 
+        <!-- SELECTOR MÉTODO DE PAGO -->
         <div class="price-box">
           <div>
             <div class="price-label">Valor de inscripción</div>
             <div class="price-amount">$25.000</div>
           </div>
-          <div class="price-note">Pago por<br>transferencia<br>bancaria</div>
+          <div class="price-note">Elige cómo<br>quieres pagar</div>
         </div>
 
-
-        <div class="transfer">
-          <div class="transfer-title-row">
-            <span class="transfer-title">Datos de transferencia</span>
-            <button class="copy-all-btn" onclick="copyAllTransfer()">📋 Copiar todo</button>
-          </div>
-          <div class="tr">
-            <span class="tr-k">Titular</span>
-            <span class="tr-v">Casa Renata Spa</span>
-          </div>
-          <div class="tr">
-            <span class="tr-k">RUT</span>
-            <span class="tr-v">77.584.271-7</span>
-          </div>
-          <div class="tr">
-            <span class="tr-k">Banco</span>
-            <span class="tr-v">Banco Santander</span>
-          </div>
-          <div class="tr">
-            <span class="tr-k">Tipo</span>
-            <span class="tr-v">Cuenta Corriente</span>
-          </div>
-          <div class="tr">
-            <span class="tr-k">N° Cuenta</span>
-            <span class="tr-v">0-000-8887815-9</span>
-          </div>
-          <div class="tr">
-            <span class="tr-k">Email</span>
-            <span class="tr-v">reinventate@casarenata.cl</span>
-          </div>
-          <div class="tr">
-            <span class="tr-k">Monto</span>
-            <span class="tr-v">$25.000</span>
-          </div>
+        <div class="pay-selector">
+          <button class="pay-opt active" id="btn-opt-transfer" onclick="selectPayment('transfer')">🏦 Transferencia</button>
+          <button class="pay-opt" id="btn-opt-flow" onclick="selectPayment('flow')">💳 Tarjeta de crédito/débito</button>
         </div>
 
-        <p class="section-divider">Adjunta tu comprobante</p>
-
-        <div class="field">
-          <label>Comprobante de transferencia *</label>
-          <div class="upload-zone" id="upload-zone">
-            <input type="file" id="comprobante" accept="image/*,.pdf" onchange="handleFileSelect(this)">
-            <div id="upload-placeholder">
-              <div class="upload-icon">📎</div>
-              <p class="upload-text"><strong>Adjunta tu comprobante</strong></p>
-              <p class="upload-text" style="font-size:11px; margin-top:4px;">Foto o captura de pantalla · JPG, PNG o PDF</p>
+        <!-- SECCIÓN TRANSFERENCIA -->
+        <div id="section-transfer">
+          <div class="transfer">
+            <div class="transfer-title-row">
+              <span class="transfer-title">Datos de transferencia</span>
+              <button class="copy-all-btn" onclick="copyAllTransfer()">📋 Copiar todo</button>
             </div>
-            <div class="upload-preview" id="upload-preview">
-              <img id="preview-img" src="" alt="Comprobante">
-              <div class="upload-preview-name" id="preview-name">
-                <span class="upload-success-icon">✓</span>
-                <span id="file-name-text"></span>
-                <button class="upload-remove" onclick="removeFile(event)">✕</button>
+            <div class="tr"><span class="tr-k">Titular</span><span class="tr-v">Casa Renata Spa</span></div>
+            <div class="tr"><span class="tr-k">RUT</span><span class="tr-v">77.584.271-7</span></div>
+            <div class="tr"><span class="tr-k">Banco</span><span class="tr-v">Banco Santander</span></div>
+            <div class="tr"><span class="tr-k">Tipo</span><span class="tr-v">Cuenta Corriente</span></div>
+            <div class="tr"><span class="tr-k">N° Cuenta</span><span class="tr-v">0-000-8887815-9</span></div>
+            <div class="tr"><span class="tr-k">Email</span><span class="tr-v">reinventate@casarenata.cl</span></div>
+            <div class="tr"><span class="tr-k">Monto</span><span class="tr-v">$25.000</span></div>
+          </div>
+
+          <p class="section-divider">Adjunta tu comprobante</p>
+
+          <div class="field">
+            <label>Comprobante de transferencia *</label>
+            <div class="upload-zone" id="upload-zone">
+              <input type="file" id="comprobante" accept="image/*,.pdf" onchange="handleFileSelect(this)">
+              <div id="upload-placeholder">
+                <div class="upload-icon">📎</div>
+                <p class="upload-text"><strong>Adjunta tu comprobante</strong></p>
+                <p class="upload-text" style="font-size:11px; margin-top:4px;">Foto o captura de pantalla · JPG, PNG o PDF</p>
+              </div>
+              <div class="upload-preview" id="upload-preview">
+                <img id="preview-img" src="" alt="Comprobante">
+                <div class="upload-preview-name" id="preview-name">
+                  <span class="upload-success-icon">✓</span>
+                  <span id="file-name-text"></span>
+                  <button class="upload-remove" onclick="removeFile(event)">✕</button>
+                </div>
               </div>
             </div>
+            <p class="field-hint">Esto agiliza la confirmación de tu cupo</p>
           </div>
-          <p class="field-hint">Esto agiliza la confirmación de tu cupo</p>
+
+          <div class="field" style="margin-top:8px;">
+            <label>Nombre en la transferencia *</label>
+            <input type="text" id="nombre-transfer" placeholder="Nombre con que aparece la transferencia">
+            <p class="field-hint">Tal como aparece en el comprobante de tu banco</p>
+          </div>
+
+          <button class="btn-submit" id="btn-submit" onclick="handleSubmit()">
+            <div class="spinner"></div>
+            <span class="btn-text">Confirmar inscripción</span>
+          </button>
         </div>
 
-        <div class="field" style="margin-top:8px;">
-          <label>Nombre en la transferencia *</label>
-          <input type="text" id="nombre-transfer" placeholder="Nombre con que aparece la transferencia">
-          <p class="field-hint">Tal como aparece en el comprobante de tu banco</p>
+        <!-- SECCIÓN FLOW -->
+        <div id="section-flow" style="display:none;">
+          <div class="flow-btn-wrap" style="margin-top:20px;">
+            <a href="https://www.flow.cl/app/web/pagarBtnPago.php?token=id946ace7cfa8ed0fdd88bb52a9433f0f1c54a99"
+               class="flow-btn" onclick="handleFlowPayment(event)">
+              Pagar $25.000 con tarjeta →
+            </a>
+          </div>
+          <p class="flow-info">Serás redirigida a Flow para completar tu pago de forma segura.<br>Tu inscripción se confirmará automáticamente.</p>
         </div>
 
-        <button class="btn-submit" id="btn-submit" onclick="handleSubmit()">
-          <div class="spinner"></div>
-          <span class="btn-text">Confirmar inscripción</span>
-        </button>
         <p style="text-align:center; margin-top:14px;">
           <button onclick="backToStep1()" style="background:none;border:none;cursor:pointer;font-size:12px;color:rgba(107,18,38,0.4);letter-spacing:1px;text-decoration:underline;font-family:'Barlow Condensed',sans-serif;">← Volver a mis datos</button>
         </p>
-        <p class="disclaimer">Al enviar, recibirás un email de confirmación y te contactaremos por WhatsApp para verificar tu pago y asegurar tu cupo.</p>
+        <p class="disclaimer">Al inscribirte, recibirás un email de confirmación. Tu cupo queda asegurado una vez verificado el pago.</p>
       </div>
 
     </div><!-- /form-body -->
@@ -1011,10 +1029,39 @@ function backToStep1() {
 // ══════════════════════════════════════════════════════
 // SUBMIT
 // ══════════════════════════════════════════════════════
+var currentPayMethod = 'transfer';
+
+function selectPayment(method) {
+  currentPayMethod = method;
+  document.getElementById('btn-opt-transfer').classList.toggle('active', method === 'transfer');
+  document.getElementById('btn-opt-flow').classList.toggle('active', method === 'flow');
+  document.getElementById('section-transfer').style.display = method === 'transfer' ? '' : 'none';
+  document.getElementById('section-flow').style.display = method === 'flow' ? '' : 'none';
+}
+
+function handleFlowPayment(e) {
+  // Guardar inscripción antes de ir a Flow
+  var timestamp = new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' });
+  var payload = Object.assign({}, formData, {
+    nombreTransfer: 'Flow - Pago con tarjeta',
+    timestamp: timestamp,
+    source: (formData.source || '') + ' [Flow]'
+  });
+  if (CONFIG.APPS_SCRIPT_URL.indexOf('PEGA_AQUI') === -1) {
+    fetch(CONFIG.APPS_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(payload)
+    }).catch(function() {});
+  }
+  // Deja que el link de Flow funcione normalmente
+}
+
 function handleSubmit() {
-  var nombreTransfer = document.getElementById('nombre-transfer').value.trim();
   var errEl = document.getElementById('form-alert-2');
   errEl.classList.remove('show');
+
+  var nombreTransfer = document.getElementById('nombre-transfer').value.trim();
 
   if (!nombreTransfer) {
     errEl.textContent = 'Por favor ingresa el nombre que aparece en tu transferencia.';
@@ -1122,4 +1169,5 @@ function showError(el, msg) {
 </script>
 </body>
 </html>
+
 
