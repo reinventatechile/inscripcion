@@ -757,11 +757,11 @@
         <!-- SECCIÓN FLOW -->
         <div id="section-flow" style="display:none;">
           <div class="flow-btn-wrap" style="margin-top:20px;">
-            <a href="https://www.flow.cl/btn.php?token=a696419f9b929bf44b66906ff78fb897972d3df1"
-               class="flow-btn" onclick="handleFlowPayment(event)">
+            <button id="btn-flow-pay" class="flow-btn" onclick="handleFlowPayment()">
               Pagar $25.000 con tarjeta →
-            </a>
+            </button>
           </div>
+          <p id="flow-error" style="display:none;color:#B85C00;font-size:13px;text-align:center;margin-top:10px;"></p>
           <p class="flow-info">Serás redirigida a Flow para completar tu pago de forma segura.<br>Tu inscripción se confirmará automáticamente.</p>
         </div>
 
@@ -1039,22 +1039,45 @@ function selectPayment(method) {
   document.getElementById('section-flow').style.display = method === 'flow' ? '' : 'none';
 }
 
-function handleFlowPayment(e) {
-  // Guardar inscripción antes de ir a Flow
-  var timestamp = new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' });
-  var payload = Object.assign({}, formData, {
-    nombreTransfer: 'Flow - Pago con tarjeta',
-    timestamp: timestamp,
-    source: (formData.source || '') + ' [Flow]'
-  });
-  if (CONFIG.APPS_SCRIPT_URL.indexOf('PEGA_AQUI') === -1) {
-    fetch(CONFIG.APPS_SCRIPT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify(payload)
-    }).catch(function() {});
+function handleFlowPayment() {
+  if (!formData || !formData.email) {
+    alert('Por favor completa tus datos primero.');
+    return;
   }
-  // Deja que el link de Flow funcione normalmente
+
+  var btn    = document.getElementById('btn-flow-pay');
+  var errEl  = document.getElementById('flow-error');
+  btn.disabled    = true;
+  btn.textContent = 'Creando orden de pago...';
+  errEl.style.display = 'none';
+
+  var payload = Object.assign({}, formData, {
+    action:    'crearPago',
+    timestamp: new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' })
+  });
+
+  fetch(CONFIG.APPS_SCRIPT_URL, {
+    method:  'POST',
+    headers: { 'Content-Type': 'text/plain' },
+    body:    JSON.stringify(payload)
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    if (data.ok && data.redirect) {
+      window.location.href = data.redirect;
+    } else {
+      btn.disabled    = false;
+      btn.textContent = 'Pagar $25.000 con tarjeta →';
+      errEl.textContent   = 'Error al crear el pago: ' + (data.error || 'intenta de nuevo');
+      errEl.style.display = 'block';
+    }
+  })
+  .catch(function() {
+    btn.disabled    = false;
+    btn.textContent = 'Pagar $25.000 con tarjeta →';
+    errEl.textContent   = 'Error de conexión. Por favor intenta de nuevo.';
+    errEl.style.display = 'block';
+  });
 }
 
 function handleSubmit() {
