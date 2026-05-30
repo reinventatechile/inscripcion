@@ -701,6 +701,7 @@
         <div class="pay-selector">
           <button class="pay-opt active" id="btn-opt-transfer" onclick="selectPayment('transfer')">🏦 Transferencia</button>
           <button class="pay-opt" id="btn-opt-flow" onclick="selectPayment('flow')">💳 Tarjeta de crédito/débito</button>
+          <button class="pay-opt" id="btn-opt-cortesia" onclick="selectPayment('cortesia')">🎟️ Código de cortesía</button>
         </div>
 
         <!-- SECCIÓN TRANSFERENCIA -->
@@ -763,6 +764,28 @@
           </div>
           <p id="flow-error" style="display:none;color:#B85C00;font-size:13px;text-align:center;margin-top:10px;"></p>
           <p class="flow-info">Serás redirigida a Flow para completar tu pago de forma segura.<br>Tu inscripción se confirmará automáticamente.</p>
+        </div>
+
+        <!-- SECCIÓN CORTESÍA -->
+        <div id="section-cortesia" style="display:none;">
+          <div class="field" style="margin-top:24px;">
+            <label>Código de cortesía</label>
+            <div style="display:flex; gap:8px; align-items:flex-start; margin-top:6px;">
+              <input type="text" id="codigo-cortesia" placeholder="INGRESA TU CÓDIGO"
+                style="flex:1; text-transform:uppercase; letter-spacing:2px; font-weight:600;"
+                oninput="this.value=this.value.toUpperCase(); cortesiaValida=false; document.getElementById('btn-submit-cortesia').style.display='none'; document.getElementById('cortesia-status').style.display='none';"
+                onkeydown="if(event.key==='Enter'){validateCourtesyCode();}">
+              <button onclick="validateCourtesyCode()"
+                style="padding:12px 16px; background:var(--burdo); color:white; border:none; border-radius:8px; cursor:pointer; font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:600; letter-spacing:1px; white-space:nowrap;">
+                Validar
+              </button>
+            </div>
+            <p id="cortesia-status" style="display:none; margin-top:10px; font-size:13px; font-weight:500; padding:10px 14px; border-radius:8px;"></p>
+          </div>
+          <button class="btn-submit" id="btn-submit-cortesia" onclick="handleCourtesySubmit()" style="display:none; margin-top:16px;">
+            <div class="spinner"></div>
+            <span class="btn-text">Confirmar inscripción de cortesía →</span>
+          </button>
         </div>
 
         <p style="text-align:center; margin-top:14px;">
@@ -832,6 +855,9 @@ var CONFIG = {
 
   WA_NUMBER:   '+56988432910',
   EVENT_DATE:  new Date('2026-05-30T11:30:00-04:00'),
+
+  // Códigos de cortesía válidos — cámbialos cuando quieras
+  CORTESIA_CODES: ['REINVENTATE2025', 'CASARENATA', 'INVITADA'],
 };
 
 // ══════════════════════════════════════════════════════
@@ -1035,8 +1061,10 @@ function selectPayment(method) {
   currentPayMethod = method;
   document.getElementById('btn-opt-transfer').classList.toggle('active', method === 'transfer');
   document.getElementById('btn-opt-flow').classList.toggle('active', method === 'flow');
+  document.getElementById('btn-opt-cortesia').classList.toggle('active', method === 'cortesia');
   document.getElementById('section-transfer').style.display = method === 'transfer' ? '' : 'none';
   document.getElementById('section-flow').style.display = method === 'flow' ? '' : 'none';
+  document.getElementById('section-cortesia').style.display = method === 'cortesia' ? '' : 'none';
 }
 
 function handleFlowPayment() {
@@ -1188,6 +1216,108 @@ function showSuccess() {
 function showError(el, msg) {
   el.textContent = msg;
   el.classList.add('show');
+}
+
+// ══════════════════════════════════════════════════════
+// CÓDIGO DE CORTESÍA
+// ══════════════════════════════════════════════════════
+var cortesiaValida = false;
+
+function validateCourtesyCode() {
+  var input = document.getElementById('codigo-cortesia');
+  var code = (input.value || '').trim().toUpperCase();
+  var statusEl = document.getElementById('cortesia-status');
+  var submitBtn = document.getElementById('btn-submit-cortesia');
+
+  if (!code) {
+    statusEl.textContent = 'Por favor ingresa tu código de cortesía.';
+    statusEl.style.cssText = 'display:block; color:var(--warning); background:rgba(184,92,0,0.08); padding:10px 14px; border-radius:8px; margin-top:10px; font-size:13px; font-weight:500;';
+    submitBtn.style.display = 'none';
+    cortesiaValida = false;
+    return;
+  }
+
+  if (CONFIG.CORTESIA_CODES.indexOf(code) !== -1) {
+    cortesiaValida = true;
+    statusEl.textContent = '✓ Código válido — puedes confirmar tu inscripción sin costo.';
+    statusEl.style.cssText = 'display:block; color:var(--success); background:rgba(45,122,79,0.08); padding:10px 14px; border-radius:8px; margin-top:10px; font-size:13px; font-weight:500;';
+    submitBtn.style.display = 'block';
+  } else {
+    cortesiaValida = false;
+    statusEl.textContent = '✗ Código no válido. Verifica que esté bien escrito o contáctanos.';
+    statusEl.style.cssText = 'display:block; color:var(--warning); background:rgba(184,92,0,0.08); padding:10px 14px; border-radius:8px; margin-top:10px; font-size:13px; font-weight:500;';
+    submitBtn.style.display = 'none';
+  }
+}
+
+function handleCourtesySubmit() {
+  if (!cortesiaValida) { validateCourtesyCode(); return; }
+  if (!formData || !formData.email) { alert('Por favor completa tus datos primero.'); return; }
+
+  var code = document.getElementById('codigo-cortesia').value.trim().toUpperCase();
+  var errEl = document.getElementById('form-alert-2');
+  var btn = document.getElementById('btn-submit-cortesia');
+  btn.classList.add('loading');
+  btn.disabled = true;
+  errEl.classList.remove('show');
+
+  var payload = Object.assign({}, formData, {
+    tipo:             'Cortesia',
+    precio:           0,
+    nombreTransfer:   'Cortesia - ' + code,
+    timestamp:        new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' }),
+    cuposDisponibles: CONFIG.TOTAL_CUPOS - cuposUsados,
+    comprobanteBase64: '',
+    comprobanteMime:   '',
+    comprobanteNombre: ''
+  });
+
+  fetch(CONFIG.APPS_SCRIPT_URL, {
+    method:  'POST',
+    headers: { 'Content-Type': 'text/plain' },
+    body:    JSON.stringify(payload)
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    if (data.result === 'success') {
+      showSuccessCortesia();
+    } else {
+      showError(errEl, 'Error al enviar. Intenta nuevamente.');
+      btn.classList.remove('loading'); btn.disabled = false;
+    }
+  })
+  .catch(function() {
+    showSuccessCortesia(); // mostrar éxito como respaldo
+  });
+}
+
+function showSuccessCortesia() {
+  document.getElementById('step2-dot').classList.remove('active');
+  document.getElementById('step2-dot').classList.add('done');
+  document.getElementById('step3-dot').classList.add('active');
+
+  document.getElementById('success-name').textContent  = formData.fname + ' ' + formData.lname;
+  document.getElementById('success-email').textContent = formData.email;
+  document.getElementById('success-phone').textContent = formData.phone;
+
+  // Adaptar mensaje de éxito para cortesía
+  var successSub = document.querySelector('.success-sub');
+  if (successSub) successSub.textContent = 'Inscripción de cortesía confirmada ✦';
+
+  document.getElementById('form-body').style.display = 'none';
+  document.getElementById('success').classList.add('show');
+
+  // Link WhatsApp adaptado para cortesía
+  var msg = encodeURIComponent(
+    '¡Hola Reinventate! Me inscribi al evento del 30 de mayo con codigo de cortesia\n\n' +
+    'Nombre: ' + formData.fname + ' ' + formData.lname + '\n' +
+    'Email: ' + formData.email + '\n' +
+    'WhatsApp: ' + formData.phone
+  );
+  document.getElementById('wa-link').href = 'https://wa.me/' + CONFIG.WA_NUMBER + '?text=' + msg;
+
+  window.scrollTo({ top: document.querySelector('.form-card').offsetTop - 20, behavior: 'smooth' });
+  updateCuposDisplay(cuposUsados + 1);
 }
 </script>
 </body>
