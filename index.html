@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reinvéntate — Inscripción 30 de Mayo</title>
+<title>Reinvéntate — Inscripción Sábado 27 de Junio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Barlow+Condensed:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -513,11 +513,11 @@
       <circle cx="24" cy="24" r="3.5" fill="#F2B8C6"/>
       <path d="M24 17 L26.5 22 L24 21 L21.5 22 Z" fill="rgba(242,184,198,0.6)"/>
     </svg>
-    <p class="eyebrow">Puerto Varas &nbsp;·&nbsp; Hotel Casona Freire</p>
+    <p class="eyebrow">Puerto Varas &nbsp;·&nbsp; Hotel Borde Lago</p>
     <h1 class="hero-title"><em>Reinvéntate</em></h1>
     <div class="date-bar">
       <div class="line"></div>
-      <span>Sábado 30 de Mayo &nbsp;·&nbsp; 11:30 hrs</span>
+      <span>Sábado 27 de Junio &nbsp;·&nbsp; 10:00 hrs</span>
       <div class="line"></div>
     </div>
   </div>
@@ -543,7 +543,7 @@
 
   <ul class="experiencia-list">
     <li>
-      <div><em>Workshop de imagen personal y colorimetría</em><small>Un espacio de reflexión y herramientas prácticas para reconectar con tu estilo y presencia.</small></div>
+      <div><em>Charla-experiencia: Rediseña tu realidad</em><small>Con Andrés San Martín — entiende cómo se forman tus creencias y aprende a romper tus límites mentales desde la neurociencia.</small></div>
     </li>
     <li>
       <div><em>Networking guiado</em><small>Conversaciones con propósito entre mujeres que están construyendo sus proyectos de vida.</small></div>
@@ -693,9 +693,25 @@
         <div class="price-box">
           <div>
             <div class="price-label">Valor de inscripción</div>
-            <div class="price-amount">$25.000</div>
+            <div class="price-amount" id="precio-display">$22.900</div>
+            <div class="price-tier" id="precio-tier" style="font-size:11px;color:rgba(107,18,38,0.55);margin-top:2px;letter-spacing:.5px;"></div>
           </div>
           <div class="price-note">Elige cómo<br>quieres pagar</div>
+        </div>
+
+        <!-- CÓDIGO DE DESCUENTO (asistentes del evento anterior) -->
+        <div class="field" style="margin-bottom:14px;">
+          <div style="display:flex; gap:8px; align-items:flex-start;">
+            <input type="text" id="codigo-descuento" placeholder="¿Código de descuento? (opcional)"
+              style="flex:1; text-transform:uppercase; letter-spacing:1px;"
+              oninput="this.value=this.value.toUpperCase();"
+              onkeydown="if(event.key==='Enter'){event.preventDefault();aplicarDescuento();}">
+            <button type="button" onclick="aplicarDescuento()"
+              style="padding:12px 16px; background:var(--burdo); color:white; border:none; border-radius:8px; cursor:pointer; font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:600; letter-spacing:1px; white-space:nowrap;">
+              Aplicar
+            </button>
+          </div>
+          <p id="descuento-status" style="display:none; margin-top:8px; font-size:13px; font-weight:500;"></p>
         </div>
 
         <div class="pay-selector">
@@ -717,7 +733,7 @@
             <div class="tr"><span class="tr-k">Tipo</span><span class="tr-v">Cuenta Corriente</span></div>
             <div class="tr"><span class="tr-k">N° Cuenta</span><span class="tr-v">0-000-8887815-9</span></div>
             <div class="tr"><span class="tr-k">Email</span><span class="tr-v">contacto@reinventatechile.cl</span></div>
-            <div class="tr"><span class="tr-k">Monto</span><span class="tr-v">$25.000</span></div>
+            <div class="tr"><span class="tr-k">Monto</span><span class="tr-v" id="precio-transfer">$22.900</span></div>
           </div>
 
           <p class="section-divider">Adjunta tu comprobante</p>
@@ -759,7 +775,7 @@
         <div id="section-flow" style="display:none;">
           <div class="flow-btn-wrap" style="margin-top:20px;">
             <button id="btn-flow-pay" class="flow-btn" onclick="handleFlowPayment()">
-              Pagar $25.000 con tarjeta →
+              Pagar $22.900 con tarjeta →
             </button>
           </div>
           <p id="flow-error" style="display:none;color:#B85C00;font-size:13px;text-align:center;margin-top:10px;"></p>
@@ -809,8 +825,8 @@
         <div class="success-row"><span>Nombre</span><span id="success-name"></span></div>
         <div class="success-row"><span>Correo</span><span id="success-email"></span></div>
         <div class="success-row"><span>WhatsApp</span><span id="success-phone"></span></div>
-        <div class="success-row"><span>Evento</span><span>Sábado 30 mayo · 11:30 hrs</span></div>
-        <div class="success-row"><span>Lugar</span><span>Hotel Casona Freire</span></div>
+        <div class="success-row"><span>Evento</span><span>Sábado 27 junio · 10:00 hrs</span></div>
+        <div class="success-row"><span>Lugar</span><span>Hotel Borde Lago</span></div>
       </div>
 
       <p style="font-size:12px;color:rgba(107,18,38,0.45);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;">Próximos pasos</p>
@@ -818,7 +834,7 @@
         <li>Revisa tu correo — te enviamos un email de confirmación ahora mismo.</li>
         <li>Verificaremos tu transferencia en las próximas horas hábiles.</li>
         <li>Una vez confirmado el pago, recibirás tu cupo asegurado por Correo.</li>
-        <li>El sábado 30 de mayo, te esperamos a las 11:30 hrs frente al lago 🌊</li>
+        <li>El sábado 27 de junio, te esperamos a las 10:00 hrs frente al lago 🌊</li>
       </ol>
 
       <a id="wa-link" href="#" target="_blank" class="btn-wa">
@@ -845,16 +861,27 @@
 var CONFIG = {
   TOTAL_CUPOS:    45,
 
-  // Pega aquí la URL de tu Google Apps Script Web App
-  // (te explico cómo obtenerla en la guía de setup)
-  APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbw6SFLgenek1pUmDhOCdVRncSuLLZksju-MN_uZ_azbKRd5rpvjcJmV7_Xyn_akNKNJ/exec',
+  // ⚠️ EVENTO JUNIO — REEMPLAZAR ANTES DE PUBLICAR:
+  // Pega aquí la URL del NUEVO Apps Script Web App (Sheet nuevo del evento de junio).
+  // Mientras diga PEGA_AQUI, el formulario NO envía datos al Sheet viejo de mayo.
+  APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbzoTAyWRa1FPuVwCpCzJvWf4lwK8Xe5curhSct126G-uuJtwETtAvuqFSJ_fDK656kR/exec',
+  // Apps Script evento MAYO (no usar — se mezclaría con el evento pasado):
+  // 'https://script.google.com/macros/s/AKfycbw6SFLgenek1pUmDhOCdVRncSuLLZksju-MN_uZ_azbKRd5rpvjcJmV7_Xyn_akNKNJ/exec'
 
-  // Para contar cupos desde Google Sheets (opcional pero recomendado)
-  // Pega la URL del CSV publicado de tu celda de cupos confirmados
-  SHEETS_CSV_URL: 'https://docs.google.com/spreadsheets/d/1Tw8Wy7jneZHLPySBYDOKRaV_upz_FtF37YfQK1bfNGE/edit?gid=1306707980#gid=1306707980',
+  // URL del NUEVO Google Sheet del evento de junio (para contar cupos):
+  SHEETS_CSV_URL: 'https://docs.google.com/spreadsheets/d/1yxUaa_Q70pp_5oqVk65y6jD6W1ncKOVzSWofDym5pao/gviz/tq?tqx=out:csv&gid=1348284104',
+  // Sheet evento MAYO: 'https://docs.google.com/spreadsheets/d/1Tw8Wy7jneZHLPySBYDOKRaV_upz_FtF37YfQK1bfNGE/edit?gid=1306707980#gid=1306707980'
 
   WA_NUMBER:   '+56988432910',
-  EVENT_DATE:  new Date('2026-05-30T11:30:00-04:00'),
+  EVENT_DATE:  new Date('2026-06-27T10:00:00-04:00'),
+
+  // ── PRECIOS POR ETAPA ──────────────────────────────
+  PRECIO_EARLY: 22900,   // early bird, hasta el 24 de junio
+  PRECIO_FULL:  25900,   // del 25 al 27 de junio
+  PRECIO_CORTE: new Date('2026-06-25T00:00:00-04:00'), // desde aquí rige PRECIO_FULL
+  // Descuento 20% para asistentes del evento anterior (código que tú compartes):
+  DESCUENTO_CODES: ['REINVENTADA20'],
+  DESCUENTO_PCT:   0.20,
 
   // Códigos de cortesía válidos — cámbialos cuando quieras
   CORTESIA_CODES: ['REINVENTATE2025', 'CASARENATA', 'INVITADA'],
@@ -865,6 +892,47 @@ var CONFIG = {
 // ══════════════════════════════════════════════════════
 var formData  = {};
 var fileData  = null;
+
+// ── PRECIOS DINÁMICOS ─────────────────────────────────
+var descuentoAplicado = false;
+function fmtCLP(n) { return '$' + Number(n).toLocaleString('es-CL'); }
+function precioBase() {
+  return (new Date() < CONFIG.PRECIO_CORTE) ? CONFIG.PRECIO_EARLY : CONFIG.PRECIO_FULL;
+}
+function precioVigente() {
+  var p = precioBase();
+  if (descuentoAplicado) p = Math.round(p * (1 - CONFIG.DESCUENTO_PCT) / 10) * 10;
+  return p;
+}
+function codigoDescuentoActual() {
+  var el = document.getElementById('codigo-descuento');
+  return (el && el.value || '').trim().toUpperCase();
+}
+function renderPrecios() {
+  var p = precioVigente(), el;
+  if (el = document.getElementById('precio-display'))  el.textContent = fmtCLP(p);
+  if (el = document.getElementById('precio-transfer')) el.textContent = fmtCLP(p);
+  if (el = document.getElementById('btn-flow-pay'))    el.textContent = 'Pagar ' + fmtCLP(p) + ' con tarjeta →';
+  if (el = document.getElementById('precio-tier')) {
+    if (descuentoAplicado) el.textContent = '20% de descuento aplicado';
+    else el.textContent = (new Date() < CONFIG.PRECIO_CORTE) ? 'Precio early bird · hasta el 24 de junio' : 'Últimos días';
+  }
+}
+function aplicarDescuento() {
+  var code = codigoDescuentoActual();
+  var st = document.getElementById('descuento-status');
+  st.style.display = 'block';
+  if (CONFIG.DESCUENTO_CODES.indexOf(code) !== -1) {
+    descuentoAplicado = true;
+    st.textContent = '✓ Código aplicado — 20% de descuento';
+    st.style.color = '#1a7f37';
+  } else {
+    descuentoAplicado = false;
+    st.textContent = 'Ese código no es válido.';
+    st.style.color = '#B85C00';
+  }
+  renderPrecios();
+}
 
 // ══════════════════════════════════════════════════════
 // CUPOS — actualiza desde Google Sheets si hay URL
@@ -1036,6 +1104,7 @@ function goToStep2() {
 
   document.getElementById('step1').style.display = 'none';
   document.getElementById('step2').style.display = 'block';
+  renderPrecios();
   window.scrollTo({ top: document.querySelector('.form-card').offsetTop - 20, behavior: 'smooth' });
 
   // Pre-fill nombre-transfer si está vacío
@@ -1081,6 +1150,9 @@ function handleFlowPayment() {
 
   var payload = Object.assign({}, formData, {
     action:    'crearPago',
+    precio:    precioVigente(),
+    descuento: descuentoAplicado ? CONFIG.DESCUENTO_PCT : 0,
+    codigoDescuento: descuentoAplicado ? codigoDescuentoActual() : '',
     timestamp: new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' })
   });
 
@@ -1095,14 +1167,14 @@ function handleFlowPayment() {
             // Usar form submit en vez de JS redirect - funciona en Safari e iOS      // (window.location.href en callbacks async bloqueado por Safari ITP)      try {        var payUrl = data.redirect;        var u = new URL(payUrl);        var tokenVal = u.searchParams.get('token');        if (tokenVal) {          var f = document.createElement('form');          f.method = 'GET';          f.action = u.origin + u.pathname;          var inp = document.createElement('input');          inp.type = 'hidden'; inp.name = 'token'; inp.value = tokenVal;          f.appendChild(inp);          document.body.appendChild(f);          f.submit();        } else {          window.location.href = payUrl;        }      } catch(e) {              // Usar form submit en vez de JS redirect - funciona en Safari e iOS      // (window.location.href en callbacks async bloqueado por Safari ITP)      try {        var payUrl = data.redirect;        var u = new URL(payUrl);        var tokenVal = u.searchParams.get('token');        if (tokenVal) {          var f = document.createElement('form');          f.method = 'GET';          f.action = u.origin + u.pathname;          var inp = document.createElement('input');          inp.type = 'hidden'; inp.name = 'token'; inp.value = tokenVal;          f.appendChild(inp);          document.body.appendChild(f);          f.submit();        } else {          window.location.href = payUrl;        }      } catch(e) {        window.location.href = data.redirect;      }      }
     } else {
       btn.disabled    = false;
-      btn.textContent = 'Pagar $25.000 con tarjeta →';
+      btn.textContent = 'Pagar ' + fmtCLP(precioVigente()) + ' con tarjeta →';
       errEl.textContent   = 'Error al crear el pago: ' + (data.error || 'intenta de nuevo');
       errEl.style.display = 'block';
     }
   })
   .catch(function() {
     btn.disabled    = false;
-    btn.textContent = 'Pagar $25.000 con tarjeta →';
+    btn.textContent = 'Pagar ' + fmtCLP(precioVigente()) + ' con tarjeta →';
     errEl.textContent   = 'Error de conexión. Por favor intenta de nuevo.';
     errEl.style.display = 'block';
   });
@@ -1133,6 +1205,10 @@ function handleSubmit() {
   var timestamp = new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' });
   var payload = Object.assign({}, formData, {
     nombreTransfer: nombreTransfer,
+    tipo:      descuentoAplicado ? 'Transferencia (20% desc.)' : 'Transferencia',
+    precio:    precioVigente(),
+    descuento: descuentoAplicado ? CONFIG.DESCUENTO_PCT : 0,
+    codigoDescuento: descuentoAplicado ? codigoDescuentoActual() : '',
     timestamp: timestamp,
     cuposDisponibles: CONFIG.TOTAL_CUPOS - cuposUsados
   });
@@ -1198,7 +1274,7 @@ function showSuccess() {
 
   // Link de WhatsApp
   var msg = encodeURIComponent(
-    '¡Hola Reinvéntate! Me inscribí al evento del 30 de mayo 🌸\n\n' +
+    '¡Hola Reinvéntate! Me inscribí al evento del 27 de junio 🌸\n\n' +
     'Nombre: ' + formData.fname + ' ' + formData.lname + '\n' +
     'Email: ' + formData.email + '\n' +
     'WhatsApp: ' + formData.phone + '\n' +
@@ -1309,7 +1385,7 @@ function showSuccessCortesia() {
 
   // Link WhatsApp adaptado para cortesía
   var msg = encodeURIComponent(
-    '¡Hola Reinventate! Me inscribi al evento del 30 de mayo con codigo de cortesia\n\n' +
+    '¡Hola Reinventate! Me inscribi al evento del 27 de junio con codigo de cortesia\n\n' +
     'Nombre: ' + formData.fname + ' ' + formData.lname + '\n' +
     'Email: ' + formData.email + '\n' +
     'WhatsApp: ' + formData.phone
