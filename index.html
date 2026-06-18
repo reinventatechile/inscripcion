@@ -699,16 +699,16 @@
           <div class="price-note">Elige cómo<br>quieres pagar</div>
         </div>
 
-        <!-- CÓDIGO DE DESCUENTO (asistentes del evento anterior) -->
+        <!-- CÓDIGO DE DESCUENTO (token QR del evento anterior) -->
         <div class="field" style="margin-bottom:14px;">
           <div style="display:flex; gap:8px; align-items:flex-start;">
-            <input type="text" id="codigo-descuento" placeholder="¿Código de descuento? (opcional)"
+            <input type="text" id="codigo-descuento" placeholder="¿Estuviste en el evento anterior? Ingresa tu código"
               style="flex:1; text-transform:uppercase; letter-spacing:1px;"
               oninput="this.value=this.value.toUpperCase();"
               onkeydown="if(event.key==='Enter'){event.preventDefault();aplicarDescuento();}">
-            <button type="button" onclick="aplicarDescuento()"
+            <button type="button" onclick="aplicarDescuento()" id="btn-aplicar-desc"
               style="padding:12px 16px; background:var(--burdo); color:white; border:none; border-radius:8px; cursor:pointer; font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:600; letter-spacing:1px; white-space:nowrap;">
-              Aplicar
+              Validar
             </button>
           </div>
           <p id="descuento-status" style="display:none; margin-top:8px; font-size:13px; font-weight:500;"></p>
@@ -880,7 +880,7 @@ var CONFIG = {
   PRECIO_FULL:  25900,   // del 25 al 27 de junio
   PRECIO_CORTE: new Date('2026-06-25T00:00:00-04:00'), // desde aquí rige PRECIO_FULL
   // Descuento 20% para asistentes del evento anterior (código que tú compartes):
-  DESCUENTO_CODES: ['REINVENTADA20'],
+  // Descuento se valida contra el backend (tokens QR del evento anterior)
   DESCUENTO_PCT:   0.20,
 
   // Códigos de cortesía válidos — cámbialos cuando quieras
@@ -921,17 +921,51 @@ function renderPrecios() {
 function aplicarDescuento() {
   var code = codigoDescuentoActual();
   var st = document.getElementById('descuento-status');
+  var btn = document.getElementById('btn-aplicar-desc');
   st.style.display = 'block';
-  if (CONFIG.DESCUENTO_CODES.indexOf(code) !== -1) {
-    descuentoAplicado = true;
-    st.textContent = '✓ Código aplicado — 20% de descuento';
-    st.style.color = '#1a7f37';
-  } else {
+
+  if (!code || code.length < 6) {
     descuentoAplicado = false;
-    st.textContent = 'Ese código no es válido.';
+    st.textContent = 'Ingresa el código que recibiste en tu correo del evento anterior.';
     st.style.color = '#B85C00';
+    renderPrecios();
+    return;
   }
-  renderPrecios();
+
+  // Validar contra el backend (Sheet de mayo)
+  st.textContent = 'Validando...';
+  st.style.color = '#666';
+  btn.disabled = true;
+  btn.textContent = '...';
+
+  fetch(CONFIG.APPS_SCRIPT_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify({ action: 'validarDescuento', codigo: code })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    btn.disabled = false;
+    btn.textContent = 'Validar';
+    if (data.ok) {
+      descuentoAplicado = true;
+      st.textContent = '✓ ¡Bienvenida de vuelta, ' + data.nombre + '! 20% de descuento aplicado';
+      st.style.color = '#1a7f37';
+    } else {
+      descuentoAplicado = false;
+      st.textContent = data.motivo || 'Código no válido.';
+      st.style.color = '#B85C00';
+    }
+    renderPrecios();
+  })
+  .catch(function() {
+    btn.disabled = false;
+    btn.textContent = 'Validar';
+    descuentoAplicado = false;
+    st.textContent = 'Error de conexión. Intenta de nuevo.';
+    st.style.color = '#B85C00';
+    renderPrecios();
+  });
 }
 
 // ══════════════════════════════════════════════════════
