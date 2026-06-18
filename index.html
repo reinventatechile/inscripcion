@@ -5,7 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reinvéntate — Inscripción Sábado 27 de Junio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Barlow+Condensed:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Alta'; src: url('Alta_regular.otf') format('opentype'); font-weight: 400; }
+  @font-face { font-family: 'Alta'; src: url('Alta_light.otf') format('opentype'); font-weight: 300; }
+</style>
 <style>
   /* ─── VARIABLES ─── */
   :root {
@@ -25,7 +29,7 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     background: var(--rosa);
     color: var(--text-dark);
     min-height: 100vh;
@@ -41,7 +45,7 @@
   }
   .hero-bg-text {
     position: absolute;
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Alta', 'Cormorant Garamond', serif;
     font-size: clamp(80px, 18vw, 200px);
     font-weight: 300;
     color: rgba(255,255,255,0.03);
@@ -58,10 +62,10 @@
     text-transform: uppercase; margin-bottom: 16px; font-weight: 300;
   }
   .hero-title {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Alta', 'Cormorant Garamond', serif;
     font-size: clamp(54px, 12vw, 86px);
     font-weight: 300; color: var(--rosa);
-    line-height: 0.88; letter-spacing: -1px; margin-bottom: 10px;
+    line-height: 0.88; letter-spacing: 1px; margin-bottom: 10px;
   }
   .hero-title em { font-style: italic; color: var(--rosa-mid); }
   .date-bar {
@@ -95,7 +99,7 @@
   }
   .cd-box.pulse { border-color: rgba(242,184,198,0.4); }
   .cd-num {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Alta', 'Cormorant Garamond', serif;
     font-size: 50px; font-weight: 300; color: var(--rosa); line-height: 1; display: block;
   }
   .cd-unit {
@@ -118,11 +122,11 @@
   .cupos-track { flex: 1; height: 3px; background: rgba(242,184,198,0.1); border-radius: 2px; }
   .cupos-fill { height: 100%; background: var(--rosa-mid); border-radius: 2px; transition: width 1.2s ease; }
   .cupos-count {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Alta', 'Cormorant Garamond', serif;
     font-size: 22px; color: var(--rosa-mid); white-space: nowrap; line-height: 1;
   }
   .cupos-count small {
-    font-family: 'Barlow Condensed', sans-serif; font-size: 12px;
+    font-family: 'DM Sans', sans-serif; font-size: 12px;
     color: rgba(242,184,198,0.35);
   }
   .cupos-urgente { color: #F2B8C6; font-weight: 600; animation: blink 1.5s ease-in-out infinite; }
@@ -222,8 +226,8 @@
   @media (max-width: 480px) { .form-card { padding: 28px 20px; } }
 
   .form-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 30px; font-weight: 400; color: var(--burdo); margin-bottom: 4px;
+    font-family: 'Alta', 'Cormorant Garamond', serif;
+    font-size: 32px; font-weight: 400; color: var(--burdo); margin-bottom: 4px; letter-spacing: 0.5px;
   }
   .form-sub {
     font-size: 11px; letter-spacing: 2px; color: rgba(107,18,38,0.4);
@@ -250,7 +254,7 @@
     width: 100%; padding: 12px 14px;
     background: #FBF5F7; border: 0.5px solid var(--burdo-border);
     border-radius: 4px;
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 16px; color: var(--text-dark);
     outline: none; transition: border-color 0.2s, background 0.2s;
     -webkit-appearance: none; appearance: none;
@@ -274,7 +278,7 @@
   .pay-selector { display: flex; gap: 8px; margin: 20px 0 4px; }
   .pay-opt {
     flex: 1; padding: 12px 10px; border-radius: 8px; border: 1.5px solid rgba(107,18,38,0.15);
-    background: #fff; color: var(--burdo); font-size: 12px; font-family: 'Barlow Condensed', sans-serif;
+    background: #fff; color: var(--burdo); font-size: 12px; font-family: 'DM Sans', sans-serif;
     font-weight: 600; letter-spacing: .5px; cursor: pointer; transition: all .2s; text-align: center;
   }
   .pay-opt.active { background: var(--burdo); color: var(--rosa); border-color: var(--burdo); }
@@ -282,7 +286,7 @@
   .flow-btn-wrap { text-align: center; padding: 8px 0 4px; }
   .flow-btn {
     display: inline-block; padding: 14px 36px; background: var(--burdo); color: var(--rosa);
-    border-radius: 4px; font-family: 'Barlow Condensed', sans-serif; font-size: 14px;
+    border-radius: 4px; font-family: 'DM Sans', sans-serif; font-size: 14px;
     font-weight: 700; letter-spacing: 1.5px; text-decoration: none; text-transform: uppercase;
     transition: opacity .2s; width: 100%; text-align: center; box-sizing: border-box;
   }
@@ -320,7 +324,7 @@
     background: none; border: none; cursor: pointer;
     font-size: 11px; color: var(--burdo); opacity: 0.5;
     transition: opacity 0.2s; padding: 0; margin-left: 6px;
-    text-decoration: underline; font-family: 'Barlow Condensed', sans-serif;
+    text-decoration: underline; font-family: 'DM Sans', sans-serif;
   }
   .copy-btn:hover { opacity: 1; }
 
@@ -366,7 +370,7 @@
     width: 100%; padding: 16px;
     background: var(--burdo); color: var(--rosa);
     border: none; border-radius: 4px;
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 13px; font-weight: 600; letter-spacing: 3.5px;
     text-transform: uppercase; cursor: pointer;
     transition: background 0.2s, transform 0.1s;
@@ -472,7 +476,7 @@
     width: 100%; padding: 15px;
     background: #25D366; color: white;
     border: none; border-radius: 4px;
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-size: 13px; font-weight: 600; letter-spacing: 2.5px;
     text-transform: uppercase; cursor: pointer;
     transition: background 0.2s;
@@ -495,23 +499,99 @@
   @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   .hero-content > * { animation: slideUp 0.7s ease both; }
   .hero-content > *:nth-child(1) { animation-delay: 0.05s; }
-  .hero-content > *:nth-child(2) { animation-delay: 0.12s; }
-  .hero-content > *:nth-child(3) { animation-delay: 0.22s; }
-  .hero-content > *:nth-child(4) { animation-delay: 0.32s; }
+  .hero-content > *:nth-child(2) { animation-delay: 0.15s; }
+  .hero-content > *:nth-child(3) { animation-delay: 0.25s; }
+  .hero-content > *:nth-child(4) { animation-delay: 0.35s; }
+  .hero-content > *:nth-child(5) { animation-delay: 0.45s; }
+
+  /* ─── SCROLL REVEAL ─── */
+  .rv-reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1);
+  }
+  .rv-reveal.on { opacity: 1; transform: none; }
+  .rv-d1 { transition-delay: .08s; }
+  .rv-d2 { transition-delay: .16s; }
+  .rv-d3 { transition-delay: .24s; }
+
+  /* ─── LIQUID BUTTONS ─── */
+  .btn-liquid {
+    position: relative; overflow: hidden; z-index: 1;
+    transition: color 0.4s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  }
+  .btn-liquid::before {
+    content: ''; position: absolute; top: 50%; left: 50%;
+    width: 0; height: 0;
+    background: var(--rosa); border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.5s cubic-bezier(.22,1,.36,1), height 0.5s cubic-bezier(.22,1,.36,1);
+    z-index: -1;
+  }
+  .btn-liquid:hover::before { width: 320%; height: 320%; }
+  .btn-liquid:hover { color: var(--burdo) !important; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(107,18,38,0.18); }
+  .btn-liquid:active { transform: translateY(0); }
+
+  .btn-liquid-inv {
+    position: relative; overflow: hidden; z-index: 1;
+    transition: color 0.4s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  }
+  .btn-liquid-inv::before {
+    content: ''; position: absolute; top: 50%; left: 50%;
+    width: 0; height: 0;
+    background: var(--burdo-deep); border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.5s cubic-bezier(.22,1,.36,1), height 0.5s cubic-bezier(.22,1,.36,1);
+    z-index: -1;
+  }
+  .btn-liquid-inv:hover::before { width: 320%; height: 320%; }
+  .btn-liquid-inv:hover { color: var(--rosa) !important; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(107,18,38,0.25); }
+
+  /* ─── HERO LOGO ─── */
+  .hero-logo { width: 120px; height: auto; margin: 0 auto 24px; display: block; opacity: 0.92; }
+
+  /* ─── PROGRESS BAR TOP ─── */
+  #rv-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--burdo); z-index: 10000; width: 0; pointer-events: none; transition: width .1s linear; }
+
+  /* ─── FORM CARD REFINEMENTS ─── */
+  .form-card { box-shadow: 0 4px 40px rgba(107,18,38,0.07); }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    box-shadow: 0 0 0 3px rgba(107,18,38,0.06);
+  }
+
+  /* ─── COUNTDOWN PULSE ─── */
+  .cd-box { transition: border-color 0.3s, transform 0.3s; }
+  .cd-box:hover { transform: translateY(-2px); border-color: rgba(242,184,198,0.3); }
+
+  /* ─── MOBILE REFINEMENTS ─── */
+  @media (max-width: 480px) {
+    .hero { padding: 48px 24px 40px; }
+    .hero-logo { width: 90px; margin-bottom: 18px; }
+    .hero-title { font-size: clamp(42px, 10vw, 64px); }
+    .cd-grid { gap: 6px; }
+    .cd-box { min-width: 64px; padding: 12px 8px 10px; }
+    .cd-num { font-size: 38px; }
+    .info-strip { flex-wrap: wrap; }
+    .info-item { min-width: 50%; border-bottom: 0.5px solid var(--burdo-border); }
+    .main { padding: 36px 16px 60px; }
+    .intro { font-size: 19px; }
+    .experiencia-list li { font-size: 13px; }
+    .price-box { flex-direction: column; text-align: center; gap: 10px; }
+    .price-note { text-align: center; }
+    .pay-selector { flex-direction: column; }
+  }
 </style>
 </head>
 <body>
+<div id="rv-bar"></div>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg-text">Reinvéntate</div>
   <div class="hero-content">
-    <svg class="logo-svg" viewBox="0 0 48 48" fill="none">
-      <circle cx="24" cy="24" r="23" stroke="rgba(242,184,198,0.3)" stroke-width="0.5"/>
-      <path d="M24 7 C24 7 34 14 34 24 C34 34 24 41 24 41" stroke="#F2B8C6" stroke-width="1.2" fill="none"/>
-      <path d="M24 7 C24 7 14 14 14 24 C14 34 24 41 24 41" stroke="rgba(242,184,198,0.3)" stroke-width="0.5" fill="none"/>
-      <circle cx="24" cy="24" r="3.5" fill="#F2B8C6"/>
-      <path d="M24 17 L26.5 22 L24 21 L21.5 22 Z" fill="rgba(242,184,198,0.6)"/>
+    <svg class="hero-logo" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg" aria-label="Reinvéntate Chile">
+      <path fill="#F2D8DC" d="M630.67,690.75c-87.98,42.59-173.35,45.76-259.6,3.11-43.91-21.71-81.4-50.95-113.4-91.57,10.62,139.02,117.34,233.83,250.5,252.06,85.87,11.76,160.75-19.65,225.67-79.39,64.09-58.97,84.14-136.26,99.31-218.21,28.32,22.56,14.17,122.18-25.46,186.83-103.94,169.55-275.22,226.62-442.27,156.75-187.53-78.44-247.48-239.3-204.61-425.26,27.28-118.35,164.05-231.89,259.47-223.99-87.95,51.68-132.99,120.14-122.81,217.36,6.22,59.48,36.15,104.94,82.15,140.19,77.58,59.45,198.22,42.11,264.96-34.28,47-53.79,49.19-117.42,37.7-180.21-11.7-63.93-55.59-109.19-113.72-142.07,33.74-9.13,62.43,4.57,88.18,18.57,137.58,74.82,154.15,230.68,58.75,351.34-22.39,28.31-51.59,48.93-84.8,68.76Z"/>
+      <path fill="#F2D8DC" d="M413.77,422.77c40.46-19.21,70.75-58.53,79-102.55-2.34,43.52,22.65,87.33,61.3,107.48-34.7,19.68-61.75,52.48-74.45,90.3-3.81-40.89-30.56-78.88-67.78-96.24"/>
+      <path fill="#F2D8DC" d="M391.4,224.52c14.77-21.69,40.12-33.8,65.46-40.61,25.34-6.81,51.73-9.31,76.82-16.97,25.09-7.66,49.82-21.65,62.34-44.71,12.51-23.06,8.32-56.27-14.1-69.9-20.79-12.65-48.09-4.85-68.95,7.67-58.48,35.11-90.84,100.21-120.12,161.82"/>
     </svg>
     <p class="eyebrow">Puerto Varas &nbsp;·&nbsp; Hotel Borde Lago</p>
     <h1 class="hero-title"><em>Reinvéntate</em></h1>
@@ -524,37 +604,37 @@
 </section>
 
 <!-- COUNTDOWN -->
-<div class="countdown-wrap">
+<div class="countdown-wrap rv-reveal">
   <p class="cd-label">Faltan</p>
   <div class="cd-grid">
-    <div class="cd-box"><span class="cd-num" id="cd-d">00</span><span class="cd-unit">días</span></div>
-    <div class="cd-box"><span class="cd-num" id="cd-h">00</span><span class="cd-unit">horas</span></div>
-    <div class="cd-box"><span class="cd-num" id="cd-m">00</span><span class="cd-unit">minutos</span></div>
-    <div class="cd-box"><span class="cd-num" id="cd-s">00</span><span class="cd-unit">segundos</span></div>
+    <div class="cd-box rv-reveal rv-d1"><span class="cd-num" id="cd-d">00</span><span class="cd-unit">días</span></div>
+    <div class="cd-box rv-reveal rv-d2"><span class="cd-num" id="cd-h">00</span><span class="cd-unit">horas</span></div>
+    <div class="cd-box rv-reveal rv-d2"><span class="cd-num" id="cd-m">00</span><span class="cd-unit">minutos</span></div>
+    <div class="cd-box rv-reveal rv-d3"><span class="cd-num" id="cd-s">00</span><span class="cd-unit">segundos</span></div>
   </div>
 </div>
 
 
 <!-- MAIN -->
 <main class="main">
-  <p class="section-tag">La experiencia</p>
-  <p class="intro">Una mañana íntima frente al lago — diseñada para mujeres que están en el momento de volver a sí mismas. No es un evento más. Es un espacio donde sales con algo concreto: claridad sobre quién eres hoy y cómo quieres mostrarte al mundo.</p>
-  <p class="intro" style="margin-top:-16px; font-size:19px;">Un sábado para ti, en uno de los lugares más hermosos del sur de Chile.</p>
+  <p class="section-tag rv-reveal">La experiencia</p>
+  <p class="intro rv-reveal">Una mañana íntima frente al lago — diseñada para mujeres que están en el momento de volver a sí mismas. No es un evento más. Es un espacio donde sales con algo concreto: claridad sobre quién eres hoy y cómo quieres mostrarte al mundo.</p>
+  <p class="intro rv-reveal" style="margin-top:-16px; font-size:19px;">Un sábado para ti, en uno de los lugares más hermosos del sur de Chile.</p>
 
   <ul class="experiencia-list">
-    <li>
+    <li class="rv-reveal rv-d1">
       <div><em>Charla-experiencia: Rediseña tu realidad</em><small>Con Andrés San Martín — entiende cómo se forman tus creencias y aprende a romper tus límites mentales desde la neurociencia.</small></div>
     </li>
-    <li>
+    <li class="rv-reveal rv-d2">
       <div><em>Networking guiado</em><small>Conversaciones con propósito entre mujeres que están construyendo sus proyectos de vida.</small></div>
     </li>
-    <li>
+    <li class="rv-reveal rv-d3">
       <div><em>Coctelería y ambientación</em><small>Bienvenida con coctelería durante toda la mañana, en un entorno cuidado frente al lago Llanquihue.</small></div>
     </li>
   </ul>
 
   <!-- FORM CARD -->
-  <div class="form-card">
+  <div class="form-card rv-reveal">
 
     <!-- STEPS BAR -->
     <div class="steps-bar">
@@ -680,7 +760,7 @@
           </select>
         </div>
 
-        <button class="btn-submit" onclick="goToStep2()">
+        <button class="btn-submit btn-liquid" onclick="goToStep2()">
           <span class="btn-text">Continuar al pago →</span>
         </button>
       </div>
@@ -707,7 +787,7 @@
               oninput="this.value=this.value.toUpperCase();"
               onkeydown="if(event.key==='Enter'){event.preventDefault();aplicarDescuento();}">
             <button type="button" onclick="aplicarDescuento()" id="btn-aplicar-desc"
-              style="padding:12px 16px; background:var(--burdo); color:white; border:none; border-radius:8px; cursor:pointer; font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:600; letter-spacing:1px; white-space:nowrap;">
+              style="padding:12px 16px; background:var(--burdo); color:white; border:none; border-radius:8px; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:14px; font-weight:600; letter-spacing:1px; white-space:nowrap;">
               Validar
             </button>
           </div>
@@ -765,7 +845,7 @@
             <p class="field-hint">Tal como aparece en el comprobante de tu banco</p>
           </div>
 
-          <button class="btn-submit" id="btn-submit" onclick="handleSubmit()">
+          <button class="btn-submit btn-liquid" id="btn-submit" onclick="handleSubmit()">
             <div class="spinner"></div>
             <span class="btn-text">Confirmar inscripción</span>
           </button>
@@ -774,7 +854,7 @@
         <!-- SECCIÓN FLOW -->
         <div id="section-flow" style="display:none;">
           <div class="flow-btn-wrap" style="margin-top:20px;">
-            <button id="btn-flow-pay" class="flow-btn" onclick="handleFlowPayment()">
+            <button id="btn-flow-pay" class="flow-btn btn-liquid-inv" onclick="handleFlowPayment()">
               Pagar $22.900 con tarjeta →
             </button>
           </div>
@@ -792,20 +872,20 @@
                 oninput="this.value=this.value.toUpperCase(); cortesiaValida=false; document.getElementById('btn-submit-cortesia').style.display='none';"
                 onkeydown="if(event.key==='Enter'){validateCourtesyCode();}">
               <button onclick="validateCourtesyCode()"
-                style="padding:12px 16px; background:var(--burdo); color:white; border:none; border-radius:8px; cursor:pointer; font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:600; letter-spacing:1px; white-space:nowrap;">
+                style="padding:12px 16px; background:var(--burdo); color:white; border:none; border-radius:8px; cursor:pointer; font-family:'DM Sans',sans-serif; font-size:14px; font-weight:600; letter-spacing:1px; white-space:nowrap;">
                 Validar
               </button>
             </div>
             <p id="cortesia-status" style="display:none; margin-top:10px; font-size:13px; font-weight:500; padding:10px 14px; border-radius:8px;"></p>
           </div>
-          <button class="btn-submit" id="btn-submit-cortesia" onclick="handleCourtesySubmit()" style="display:none; margin-top:16px;">
+          <button class="btn-submit btn-liquid" id="btn-submit-cortesia" onclick="handleCourtesySubmit()" style="display:none; margin-top:16px;">
             <div class="spinner"></div>
             <span class="btn-text">Confirmar inscripción de cortesía →</span>
           </button>
         </div>
 
         <p style="text-align:center; margin-top:14px;">
-          <button onclick="backToStep1()" style="background:none;border:none;cursor:pointer;font-size:12px;color:rgba(107,18,38,0.4);letter-spacing:1px;text-decoration:underline;font-family:'Barlow Condensed',sans-serif;">← Volver a mis datos</button>
+          <button onclick="backToStep1()" style="background:none;border:none;cursor:pointer;font-size:12px;color:rgba(107,18,38,0.4);letter-spacing:1px;text-decoration:underline;font-family:'DM Sans',sans-serif;">← Volver a mis datos</button>
         </p>
         <p class="disclaimer">Al inscribirte, recibirás un email de confirmación. Tu cupo queda asegurado una vez verificado el pago.</p>
       </div>
@@ -848,7 +928,7 @@
 </main>
 
 <!-- FOOTER -->
-<footer class="footer">
+<footer class="footer rv-reveal">
   <div class="footer-logo">Reinvéntate</div>
   <div class="footer-contact">contacto@reinventatechile.cl &nbsp;·&nbsp; @reinventate.chile</div>
 </footer>
@@ -1419,6 +1499,36 @@ function handleCourtesySubmit() {
     showSuccessCortesia(); // mostrar éxito como respaldo
   });
 }
+
+// ══════════════════════════════════════════════════════
+// SCROLL REVEAL (IntersectionObserver)
+// ══════════════════════════════════════════════════════
+(function() {
+  var els = document.querySelectorAll('.rv-reveal');
+  if (!els.length) return;
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(function(el) { io.observe(el); });
+  } else {
+    els.forEach(function(el) { el.classList.add('on'); });
+  }
+})();
+
+// ══════════════════════════════════════════════════════
+// SCROLL PROGRESS BAR
+// ══════════════════════════════════════════════════════
+(function() {
+  var bar = document.getElementById('rv-bar');
+  if (!bar) return;
+  window.addEventListener('scroll', function() {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? (window.scrollY / h * 100) : 0) + '%';
+  }, { passive: true });
+})();
 
 function showSuccessCortesia() {
   document.getElementById('step2-dot').classList.remove('active');
