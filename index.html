@@ -789,7 +789,7 @@
             <div style="display:flex; gap:8px; align-items:flex-start; margin-top:6px;">
               <input type="text" id="codigo-cortesia" placeholder="INGRESA TU CÓDIGO"
                 style="flex:1; text-transform:uppercase; letter-spacing:2px; font-weight:600;"
-                oninput="this.value=this.value.toUpperCase(); cortesiaValida=false; document.getElementById('btn-submit-cortesia').style.display='none'; document.getElementById('cortesia-status').style.display='none';"
+                oninput="this.value=this.value.toUpperCase(); cortesiaValida=false; document.getElementById('btn-submit-cortesia').style.display='none';"
                 onkeydown="if(event.key==='Enter'){validateCourtesyCode();}">
               <button onclick="validateCourtesyCode()"
                 style="padding:12px 16px; background:var(--burdo); color:white; border:none; border-radius:8px; cursor:pointer; font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:600; letter-spacing:1px; white-space:nowrap;">
@@ -883,8 +883,7 @@ var CONFIG = {
   // Descuento se valida contra el backend (tokens QR del evento anterior)
   DESCUENTO_PCT:   0.20,
 
-  // Códigos de cortesía válidos — cámbialos cuando quieras
-  CORTESIA_CODES: ['REINVENTATE2025', 'CASARENATA', 'INVITADA'],
+  // Cortesía se valida contra el backend (hoja "Cortesias" en Sheets)
 };
 
 // ══════════════════════════════════════════════════════
@@ -1332,6 +1331,7 @@ function showError(el, msg) {
 // CÓDIGO DE CORTESÍA
 // ══════════════════════════════════════════════════════
 var cortesiaValida = false;
+var cortesiaNombre = '';
 
 function validateCourtesyCode() {
   var input = document.getElementById('codigo-cortesia');
@@ -1347,17 +1347,36 @@ function validateCourtesyCode() {
     return;
   }
 
-  if (CONFIG.CORTESIA_CODES.indexOf(code) !== -1) {
-    cortesiaValida = true;
-    statusEl.textContent = '✓ Código válido — puedes confirmar tu inscripción sin costo.';
-    statusEl.style.cssText = 'display:block; color:var(--success); background:rgba(45,122,79,0.08); padding:10px 14px; border-radius:8px; margin-top:10px; font-size:13px; font-weight:500;';
-    submitBtn.style.display = 'block';
-  } else {
+  statusEl.textContent = 'Validando...';
+  statusEl.style.cssText = 'display:block; color:#666; background:rgba(0,0,0,0.04); padding:10px 14px; border-radius:8px; margin-top:10px; font-size:13px; font-weight:500;';
+  submitBtn.style.display = 'none';
+
+  fetch(CONFIG.APPS_SCRIPT_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify({ action: 'validarCortesia', codigo: code })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    if (data.ok) {
+      cortesiaValida = true;
+      cortesiaNombre = data.nombre || '';
+      statusEl.textContent = '✓ ¡Bienvenida, ' + data.nombre + '! Tu invitación es válida.';
+      statusEl.style.cssText = 'display:block; color:var(--success); background:rgba(45,122,79,0.08); padding:10px 14px; border-radius:8px; margin-top:10px; font-size:13px; font-weight:500;';
+      submitBtn.style.display = 'block';
+    } else {
+      cortesiaValida = false;
+      statusEl.textContent = '✗ ' + (data.motivo || 'Código no válido.');
+      statusEl.style.cssText = 'display:block; color:var(--warning); background:rgba(184,92,0,0.08); padding:10px 14px; border-radius:8px; margin-top:10px; font-size:13px; font-weight:500;';
+      submitBtn.style.display = 'none';
+    }
+  })
+  .catch(function() {
     cortesiaValida = false;
-    statusEl.textContent = '✗ Código no válido. Verifica que esté bien escrito o contáctanos.';
+    statusEl.textContent = 'Error de conexión. Intenta de nuevo.';
     statusEl.style.cssText = 'display:block; color:var(--warning); background:rgba(184,92,0,0.08); padding:10px 14px; border-radius:8px; margin-top:10px; font-size:13px; font-weight:500;';
     submitBtn.style.display = 'none';
-  }
+  });
 }
 
 function handleCourtesySubmit() {
