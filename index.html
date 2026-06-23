@@ -1277,7 +1277,25 @@ function handleFlowPayment() {
   .then(function(r) { return r.json(); })
   .then(function(data) {
     if (data.ok && data.redirect) {
-            // Usar form submit en vez de JS redirect - funciona en Safari e iOS      // (window.location.href en callbacks async bloqueado por Safari ITP)      try {        var payUrl = data.redirect;        var u = new URL(payUrl);        var tokenVal = u.searchParams.get('token');        if (tokenVal) {          var f = document.createElement('form');          f.method = 'GET';          f.action = u.origin + u.pathname;          var inp = document.createElement('input');          inp.type = 'hidden'; inp.name = 'token'; inp.value = tokenVal;          f.appendChild(inp);          document.body.appendChild(f);          f.submit();        } else {          window.location.href = payUrl;        }      } catch(e) {              // Usar form submit en vez de JS redirect - funciona en Safari e iOS      // (window.location.href en callbacks async bloqueado por Safari ITP)      try {        var payUrl = data.redirect;        var u = new URL(payUrl);        var tokenVal = u.searchParams.get('token');        if (tokenVal) {          var f = document.createElement('form');          f.method = 'GET';          f.action = u.origin + u.pathname;          var inp = document.createElement('input');          inp.type = 'hidden'; inp.name = 'token'; inp.value = tokenVal;          f.appendChild(inp);          document.body.appendChild(f);          f.submit();        } else {          window.location.href = payUrl;        }      } catch(e) {        window.location.href = data.redirect;      }      }
+      try {
+        var payUrl = data.redirect;
+        var u = new URL(payUrl);
+        var tokenVal = u.searchParams.get('token');
+        if (tokenVal) {
+          var f = document.createElement('form');
+          f.method = 'GET';
+          f.action = u.origin + u.pathname;
+          var inp = document.createElement('input');
+          inp.type = 'hidden'; inp.name = 'token'; inp.value = tokenVal;
+          f.appendChild(inp);
+          document.body.appendChild(f);
+          f.submit();
+        } else {
+          window.location.href = payUrl;
+        }
+      } catch(e) {
+        window.location.href = data.redirect;
+      }
     } else {
       btn.disabled    = false;
       btn.textContent = 'Pagar ' + fmtCLP(precioVigente()) + ' con tarjeta →';
